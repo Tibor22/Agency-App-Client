@@ -6,9 +6,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import ContactUs from './pages/ContacUs/ContactUs';
 import AboutUs from './pages/AboutUs/AboutUs';
-import HowItWorks from './pages/HowItWorks/HowItWorks';
+import HowItWorksEmployee from './pages/HowItWorks/HowItWorksEmployee';
+import HowItWorksEmployer from './pages/HowItWorks/HowItWorksEmployer';
 import JobPost from './pages/JobPost/JobPost';
 import Posts from './pages/Posts/Posts';
+import Navbar from './components/Navbar';
 
 function App() {
 	const { user, isLoggedIn } = useContext(UserContext);
@@ -16,11 +18,13 @@ function App() {
 
 	return (
 		<BrowserRouter>
+			<Navbar />
 			<Routes>
-				<Route path='/home' element={<Home />} />
+				<Route path='/' element={<Home />} />
 				<Route path='/contact' element={<ContactUs />} />
 				<Route path='/about' element={<AboutUs />} />
-				<Route path='/how-it-works' element={<HowItWorks />} />
+				<Route path='/how-it-works/employee' element={<HowItWorksEmployee />} />
+				<Route path='/how-it-works/employer' element={<HowItWorksEmployer />} />
 				<Route path='/posts' element={<Posts />} />
 				<Route path='/posts/:id' element={<JobPost />} />
 			</Routes>

@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;1,600;1,700&display=swap');
 $color-primary: #e0edff;
 $color-primary-dark: #1f344f;
 $color-btn-primary: #eb714c;
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;1,600;1,700&display=swap');
+$color-primary-hover: #61a1e1;
 $font-family-primary: 'Nunito', sans-serif;
 $font-family-title: 'Source Sans Pro', sans-serif;
 * {
@@ -13,6 +14,7 @@ $font-family-title: 'Source Sans Pro', sans-serif;
 :root {
 	--color-primary: #{$color-primary};
 	--color-primary-dark: #{$color-primary-dark};
+	--color-primary-hover: #{$color-primary-hover};
 	--color-btn-primary: #{$color-btn-primary};
 	--font-family-primary: #{$font-family-primary};
 	--font-family-title: #{$font-family-title};
@@ -20,4 +22,5 @@ $font-family-title: 'Source Sans Pro', sans-serif;
 
 html {
 	font-size: 62.5%;
+	font-family: var(--font-family-primary);
 }
