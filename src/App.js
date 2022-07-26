@@ -3,12 +3,12 @@ import { UserContext } from '../src/context/UserContext';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 //Pages
-import Home from '../src/pages/Home';
-import ContactUs from '../src/pages/ContactUs';
-import AboutUs from '../src/pages/AboutUs';
-import HowItWorks from '../src/pages/HowItWorks';
-import JobPost from '../src/pages/JobPost';
-import Posts from '../src/pages/Posts';
+import Home from './pages/Home/Home';
+import ContactUs from './pages/ContacUs/ContactUs';
+import AboutUs from './pages/AboutUs/AboutUs';
+import HowItWorks from './pages/HowItWorks/HowItWorks';
+import JobPost from './pages/JobPost/JobPost';
+import Posts from './pages/Posts/Posts';
 
 function App() {
 	const { user, isLoggedIn } = useContext(UserContext);
