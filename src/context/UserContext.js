@@ -1,5 +1,5 @@
 import { useReducer, createContext } from 'react';
-const UserContext = createContext();
+export const UserContext = createContext();
 
 export const userReducer = (state, action) => {
 	switch (action.type) {
@@ -15,6 +15,12 @@ export default function UserContextProvider({ children }) {
 		user: null,
 		isLoggedIn: false,
 	});
+
+	console.log(state);
+
+	// useEffect(() => {
+	//      dispatch({type:})
+	// },[])
 
 	return (
 		<UserContext.Provider value={{ ...state, dispatch }}>
