@@ -47,6 +47,9 @@
   background-color: var(--color-primary-hover);
   color: #fff;
 }
+.navbar_link-dropdown.text-small {
+  font-size: 0.3rem;
+}
 
 .how-it-works:hover .dropdown {
   display: block;

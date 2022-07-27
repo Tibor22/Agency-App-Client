@@ -48,6 +48,10 @@
 				color: #fff;
 			}
 		}
+
+		&-dropdown.text-small {
+			font-size: 0.3rem;
+		}
 	}
 }
 
@@ -62,6 +66,7 @@
 	color: var(--color-primary-dark);
 	cursor: default;
 }
+
 .dropdown {
 	border-radius: 0rem 0rem 3rem 0rem;
 }

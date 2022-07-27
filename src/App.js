@@ -10,7 +10,8 @@ import HowItWorksEmployee from './pages/HowItWorks/HowItWorksEmployee';
 import HowItWorksEmployer from './pages/HowItWorks/HowItWorksEmployer';
 import JobPost from './pages/JobPost/JobPost';
 import Posts from './pages/Posts/Posts';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
+import SignIn from './pages/SignIn/SignIn';
 
 function App() {
 	const { user, isLoggedIn } = useContext(UserContext);
@@ -27,6 +28,7 @@ function App() {
 				<Route path='/how-it-works/employer' element={<HowItWorksEmployer />} />
 				<Route path='/posts' element={<Posts />} />
 				<Route path='/posts/:id' element={<JobPost />} />
+				<Route path='/sign-in/:type' element={<SignIn />} />
 			</Routes>
 		</BrowserRouter>
 	);
