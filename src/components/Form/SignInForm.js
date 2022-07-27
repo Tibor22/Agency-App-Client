@@ -58,7 +58,7 @@ export default function SignInForm({ setFormType, formType }) {
 				</div>
 			</div>
 			<p className='signIn-form--container--header'>SIGN IN</p>
-			<form onSubmit={handleSubmit} className='signIn-form'>
+			<form onSubmit={handleSubmit} className='sign-form'>
 				<label className='form-controller'>
 					<span>Email</span>
 					<input

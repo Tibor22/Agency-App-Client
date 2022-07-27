@@ -18,10 +18,6 @@ export default function UserContextProvider({ children }) {
 
 	console.log(state);
 
-	// useEffect(() => {
-	//      dispatch({type:})
-	// },[])
-
 	return (
 		<UserContext.Provider value={[state, dispatch]}>
 			{children}

@@ -1,15 +1,19 @@
 import FormSignUpHeader from './FormSignUpHeader';
-
-export default function SignUpFirstForm({
+export default function SignUpSecondForm({
 	setFormType,
 	formType,
 	userType,
-	setCurrentStep,
 	currStep,
+	setCurrentStep,
 }) {
 	const next = (e) => {
 		e.preventDefault();
 		setCurrentStep((currStep += 1));
+	};
+
+	const prev = (e) => {
+		e.preventDefault();
+		setCurrentStep((currStep -= 1));
 	};
 
 	return (
@@ -19,35 +23,38 @@ export default function SignUpFirstForm({
 				currStep={currStep}
 				setFormType={setFormType}
 				formType={formType}
-				title={'ACCOUNT SETUP'}
+				title={'PERSONAL DETAILS'}
 			/>
 			<form className='sign-form'>
 				<label className='form-controller '>
-					<span>Email</span>
+					<span>First Name</span>
 					<input
 						// onChange={handleChange}
-						type='email'
+						type='text'
 						// value={signInForm.email}
 					/>
 				</label>
 				<label className='form-controller'>
-					<span>Password</span>
+					<span>Last Name</span>
 					<input
 						// onChange={handleChange}
-						type='password'
+						type='text'
 						// value={signInForm.password}
 					/>
 				</label>
 				<label className='form-controller'>
-					<span>Password Again</span>
+					<span>Address</span>
 					<input
 						// onChange={handleChange}
-						type='password'
+						type='text'
 						// value={signInForm.password}
 					/>
 				</label>
 				<button onClick={next} className='btn-blue'>
 					Next
+				</button>
+				<button onClick={prev} className='btn-blue'>
+					Previous
 				</button>
 			</form>
 		</div>
