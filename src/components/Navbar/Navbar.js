@@ -1,12 +1,24 @@
 import './navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignIn } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 
 export default function Navbar() {
 	const element = <FontAwesomeIcon icon={faSignIn} />;
+	const name = JSON.parse(localStorage.getItem('user'));
+	const navigate = useNavigate();
+
+	const signOut = () => {
+		if (name) {
+			localStorage.removeItem(process.env.REACT_APP_USER_TOKEN);
+			localStorage.removeItem('user');
+			navigate('/', { replace: true });
+		}
+	};
+
 	return (
 		<div className='navbar-container'>
 			<div className='navbar'>
@@ -37,6 +49,11 @@ export default function Navbar() {
 						</div>
 					</li>
 					<li className='navbar_list--item'>
+						<Link className='navbar_link' to='/posts'>
+							Jobs
+						</Link>
+					</li>
+					<li className='navbar_list--item'>
 						<Link className='navbar_link' to='/about'>
 							About Us
 						</Link>
@@ -46,16 +63,19 @@ export default function Navbar() {
 							Contact Us
 						</Link>
 					</li>
-					<li className='navbar_list--item how-it-works '>
-						Sign In {element}
-						<div className='dropdown'>
-							<Link className='navbar_link-dropdown' to='/sign-in/employee'>
-								Employee
-							</Link>
-							<Link className='navbar_link-dropdown' to='/sign-in/employer'>
-								Employer
-							</Link>
-						</div>
+
+					<li onClick={signOut} className='navbar_list--item how-it-works '>
+						{name ? 'Sign Out' : 'Sign In'} {element}
+						{!name && (
+							<div className='dropdown'>
+								<Link className='navbar_link-dropdown' to='/sign-in/employee'>
+									Employee
+								</Link>
+								<Link className='navbar_link-dropdown' to='/sign-in/employer'>
+									Employer
+								</Link>
+							</div>
+						)}
 					</li>
 				</ul>
 			</div>

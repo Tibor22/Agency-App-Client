@@ -14,7 +14,7 @@ import Navbar from './components/Navbar/Navbar';
 import SignIn from './pages/SignIn/SignIn';
 
 function App() {
-	const { user, isLoggedIn } = useContext(UserContext);
+	const [user, isLoggedIn] = useContext(UserContext);
 	console.log(user, isLoggedIn);
 
 	return (

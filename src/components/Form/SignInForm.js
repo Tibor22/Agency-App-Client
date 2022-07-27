@@ -1,12 +1,19 @@
 import './form.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignIn } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
+
 import client from '../../utils/client.js';
 
 export default function SignInForm({ setFormType, formType }) {
 	const element = <FontAwesomeIcon icon={faSignIn} />;
+	const [user, dispatch] = useContext(UserContext);
+	let navigate = useNavigate();
 	const [signInForm, setSignInForm] = useState({ email: '', password: '' });
+
+	console.log(user, dispatch);
 	const handleChange = (e) => {
 		const { type, value } = e.target;
 		setSignInForm({
@@ -18,6 +25,17 @@ export default function SignInForm({ setFormType, formType }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const data = await client.post('/user/login', signInForm);
+		if (data) {
+			localStorage.setItem(
+				process.env.REACT_APP_USER_TOKEN,
+				data.data.data.accessToken
+			);
+			localStorage.setItem('user', JSON.stringify(data.data.data));
+			delete data.data.data.accessToken;
+			dispatch({ type: 'LOGIN', payload: data.data.data });
+			navigate('/posts', { replace: true });
+		}
+
 		console.log('DATA:', data);
 	};
 	console.log(signInForm);
@@ -43,11 +61,19 @@ export default function SignInForm({ setFormType, formType }) {
 			<form onSubmit={handleSubmit} className='signIn-form'>
 				<label className='form-controller'>
 					<span>Email</span>
-					<input onChange={handleChange} type='email' />
+					<input
+						onChange={handleChange}
+						type='email'
+						value={signInForm.email}
+					/>
 				</label>
 				<label className='form-controller'>
 					<span>Password</span>
-					<input onChange={handleChange} type='password' />
+					<input
+						onChange={handleChange}
+						type='password'
+						value={signInForm.password}
+					/>
 				</label>
 				<button className='btn-blue'>Sign In {element}</button>
 			</form>

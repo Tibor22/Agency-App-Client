@@ -23,7 +23,7 @@ export default function UserContextProvider({ children }) {
 	// },[])
 
 	return (
-		<UserContext.Provider value={{ ...state, dispatch }}>
+		<UserContext.Provider value={[state, dispatch]}>
 			{children}
 		</UserContext.Provider>
 	);
