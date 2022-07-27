@@ -1,0 +1,9 @@
+.signIn-container {
+  background-color: var(--color-primary);
+  height: calc(100vh - 6rem);
+  background: rgb(224, 237, 255);
+  background: linear-gradient(180deg, rgb(224, 237, 255) 44%, rgb(235, 113, 76) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}/*# sourceMappingURL=signIn.css.map */

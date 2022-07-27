@@ -1,0 +1,97 @@
+.signIn-form--container {
+  height: 40rem;
+  width: 40rem;
+  background-color: #fff;
+  color: var(--color-primary-hover);
+}
+.signIn-form--container--header {
+  text-align: center;
+  margin-top: 3.5rem;
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+}
+
+.switch {
+  height: 6rem;
+  border-bottom: 1px solid var(--color-primary-hover);
+  display: flex;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.switch-signIn {
+  background-color: white;
+  color: var(--color-primary-hover);
+  height: 100%;
+  width: 50%;
+}
+.switch-signIn:hover {
+  color: #fff;
+  background-color: var(--color-btn-primary);
+  opacity: 0.3;
+}
+.switch-signUp {
+  background-color: white;
+  color: var(--color-primary-hover);
+  height: 100%;
+  width: 50%;
+}
+.switch-signUp:hover {
+  color: #fff;
+  background-color: var(--color-btn-primary);
+  opacity: 0.3;
+}
+.switch_active {
+  background-color: var(--color-btn-primary);
+  height: 100%;
+  width: 50%;
+  color: #fff;
+}
+
+.signIn-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signIn-form input {
+  display: block;
+  padding: 1.5rem;
+  width: 100%;
+  font-size: 1.2rem;
+  border: 1px solid var(--color-primary-hover);
+}
+
+.btn-blue {
+  background-color: var(--color-primary-hover);
+  text-transform: uppercase;
+  width: 80%;
+  color: #fff;
+  padding: 1.5rem 0rem;
+  border: none;
+  cursor: pointer;
+}
+.btn-blue:hover {
+  background-color: var(--color-btn-primary);
+  opacity: 0.3;
+}
+
+.form-controller {
+  margin-bottom: 2rem;
+  width: 80%;
+}
+
+.form-controller span {
+  font-size: 1.3rem;
+}
+
+.signUp-form--container {
+  height: 40rem;
+  width: 40rem;
+  background-color: #fff;
+  color: var(--color-primary-hover);
+}
+.signUp-form--container--header {
+  text-align: center;
+  margin-top: 3.5rem;
+  font-size: 2.2rem;
+}/*# sourceMappingURL=form.css.map */

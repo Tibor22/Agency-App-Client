@@ -24,3 +24,8 @@ html {
 	font-size: 62.5%;
 	font-family: var(--font-family-primary);
 }
+
+.center {
+	display: grid;
+	place-items: center;
+}
