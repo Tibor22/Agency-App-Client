@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Form from '../../components/Form/Form.js';
+import { useContext } from 'react';
+import FormContextProvider from '../../context/FormContext.js';
 import './signIn.css';
 
 export default function SignIn() {
@@ -13,7 +15,9 @@ export default function SignIn() {
 
 	return (
 		<div className='signIn-container'>
-			<Form userType={userType} setUseType={setUseType} />
+			<FormContextProvider>
+				<Form userType={userType} setUseType={setUseType} />
+			</FormContextProvider>
 		</div>
 	);
 }

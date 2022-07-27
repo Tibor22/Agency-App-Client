@@ -1,4 +1,6 @@
 import FormSignUpHeader from './FormSignUpHeader';
+import { useContext, useState } from 'react';
+import { FormContext } from '../../context/FormContext';
 export default function SignUpSecondForm({
 	setFormType,
 	formType,
@@ -6,14 +8,28 @@ export default function SignUpSecondForm({
 	currStep,
 	setCurrentStep,
 }) {
+	const [formData, setFormData] = useContext(FormContext);
+	const [errorMsg, setErrorMsg] = useState(null);
 	const next = (e) => {
 		e.preventDefault();
-		setCurrentStep((currStep += 1));
+		if (!formData.firstName || !formData.lastName || !formData.address) {
+			setErrorMsg('Missing field(s)');
+		} else {
+			setCurrentStep((currStep += 1));
+			setErrorMsg(null);
+		}
 	};
 
 	const prev = (e) => {
 		e.preventDefault();
 		setCurrentStep((currStep -= 1));
+	};
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormData({
+			...formData,
+			[name]: value,
+		});
 	};
 
 	return (
@@ -29,27 +45,31 @@ export default function SignUpSecondForm({
 				<label className='form-controller '>
 					<span>First Name</span>
 					<input
-						// onChange={handleChange}
+						onChange={handleChange}
 						type='text'
-						// value={signInForm.email}
+						name='firstName'
+						value={formData.firstName}
 					/>
 				</label>
 				<label className='form-controller'>
 					<span>Last Name</span>
 					<input
-						// onChange={handleChange}
+						onChange={handleChange}
 						type='text'
-						// value={signInForm.password}
+						name='lastName'
+						value={formData.lastName}
 					/>
 				</label>
 				<label className='form-controller'>
 					<span>Address</span>
 					<input
-						// onChange={handleChange}
+						onChange={handleChange}
 						type='text'
-						// value={signInForm.password}
+						value={formData.address}
+						name='address'
 					/>
 				</label>
+				{errorMsg && <span className='error'>{errorMsg}</span>}
 				<button onClick={next} className='btn-blue'>
 					Next
 				</button>

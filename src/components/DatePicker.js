@@ -2,16 +2,12 @@ import React from 'react';
 import { useState } from 'react';
 import { DatePicker } from 'react-rainbow-components';
 
-export default function DatePickerFunc({ title }) {
-	const initialState = {
-		date: new Date('2022-7-25 10:44'),
-	};
-
-	const [state, setState] = useState(initialState);
-
+export default function DatePickerFunc({ setErrorMsg, setFormData, formData }) {
 	const containerStyles = {
 		maxWidth: 400,
 	};
+
+	const dateType = formData.type === 'employer' ? 'startOfBusiness' : 'DoB';
 
 	return (
 		<div>
@@ -21,8 +17,8 @@ export default function DatePickerFunc({ title }) {
 			>
 				<DatePicker
 					id='datePicker-1'
-					value={state.date}
-					onChange={(value) => setState({ date: value })}
+					value={formData[dateType]}
+					onChange={(value) => setFormData({ ...formData, [dateType]: value })}
 					label=''
 					formatStyle='large'
 				/>

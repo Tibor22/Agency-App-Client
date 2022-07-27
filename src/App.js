@@ -15,7 +15,6 @@ import SignIn from './pages/SignIn/SignIn';
 
 function App() {
 	const [user, isLoggedIn] = useContext(UserContext);
-	console.log(user, isLoggedIn);
 
 	return (
 		<BrowserRouter>

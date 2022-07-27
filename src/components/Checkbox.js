@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { CheckboxGroup } from 'react-rainbow-components';
 
-export default function Checkbox() {
+export default function Checkbox({ setErrorMsg, values, setValues }) {
 	const options = [
 		{ value: 'Privacy Policy', label: 'Privacy Policy', disabled: false },
 		{ value: 'Terms&Conditions', label: 'Terms & Conditions', disabled: false },
 	];
 
 	const CheckboxGroupTry = () => {
-		const [values, setValues] = useState([]);
-
 		return (
 			<CheckboxGroup
 				id='checkbox-group-1'

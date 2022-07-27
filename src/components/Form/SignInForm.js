@@ -13,7 +13,6 @@ export default function SignInForm({ setFormType, formType }) {
 	let navigate = useNavigate();
 	const [signInForm, setSignInForm] = useState({ email: '', password: '' });
 
-	console.log(user, dispatch);
 	const handleChange = (e) => {
 		const { type, value } = e.target;
 		setSignInForm({
@@ -35,10 +34,7 @@ export default function SignInForm({ setFormType, formType }) {
 			dispatch({ type: 'LOGIN', payload: data.data.data });
 			navigate('/posts', { replace: true });
 		}
-
-		console.log('DATA:', data);
 	};
-	console.log(signInForm);
 
 	return (
 		<div className='signIn-form--container'>
