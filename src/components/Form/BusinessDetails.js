@@ -14,6 +14,7 @@ export default function BusinessDetails({ setCurrentStep, currStep }) {
 	const [user, dispatch] = useContext(UserContext);
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [values, setValues] = useState([]);
+	const [isPending, setIsPending] = useState(false);
 	const prev = (e) => {
 		e.preventDefault();
 		setCurrentStep((currStep -= 1));
@@ -39,7 +40,7 @@ export default function BusinessDetails({ setCurrentStep, currStep }) {
 			setFormData((prevState) => {
 				return { ...prevState, terms: true, privacyPolicy: true };
 			});
-			setErrorMsg('');
+			setErrorMsg(null);
 			return true;
 		} else {
 			setFormData({ ...formData, terms: false, privacyPolicy: false });
@@ -49,10 +50,13 @@ export default function BusinessDetails({ setCurrentStep, currStep }) {
 	}
 
 	const submitForm = async (e) => {
+		setErrorMsg(null);
+		setIsPending(true);
 		e.preventDefault();
-		console.log(validateInputs());
-		if (!validateInputs()) return;
-		console.log('FORM DATA BUSINESS LINE 46:', formData);
+		if (!validateInputs()) {
+			setIsPending(false);
+			return;
+		}
 
 		const userData = {
 			...formData,
@@ -71,8 +75,10 @@ export default function BusinessDetails({ setCurrentStep, currStep }) {
 			delete data.data.accessToken;
 			localStorage.setItem('user', JSON.stringify(data.data));
 			dispatch({ type: 'LOGIN', payload: data.data });
+			setIsPending(false);
 			navigate('/posts', { replace: true });
 		}
+		setIsPending(false);
 	};
 
 	return (
@@ -107,6 +113,7 @@ export default function BusinessDetails({ setCurrentStep, currStep }) {
 					setValues={setValues}
 				/>
 			</label>
+			{isPending && <span class='loader'></span>}
 			{errorMsg && <span className='error'>{errorMsg}</span>}
 			<button className='btn-blue'>Submit</button>
 			<button onClick={prev} className='btn-blue'>

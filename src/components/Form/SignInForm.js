@@ -12,7 +12,8 @@ export default function SignInForm({ setFormType, formType }) {
 	const [user, dispatch] = useContext(UserContext);
 	let navigate = useNavigate();
 	const [signInForm, setSignInForm] = useState({ email: '', password: '' });
-
+	const [isPending, setIsPending] = useState(false);
+	const [errorMsg, setErrorMsg] = useState(null);
 	const handleChange = (e) => {
 		const { type, value } = e.target;
 		setSignInForm({
@@ -22,18 +23,25 @@ export default function SignInForm({ setFormType, formType }) {
 	};
 
 	const handleSubmit = async (e) => {
+		setIsPending(true);
 		e.preventDefault();
-		const data = await client.post('/user/login', signInForm);
-		if (data) {
-			localStorage.setItem(
-				process.env.REACT_APP_USER_TOKEN,
-				data.data.data.accessToken
-			);
-			localStorage.setItem('user', JSON.stringify(data.data.data));
-			delete data.data.data.accessToken;
-			dispatch({ type: 'LOGIN', payload: data.data.data });
-			navigate('/posts', { replace: true });
+		try {
+			const data = await client.post('/user/login', signInForm);
+			if (data) {
+				localStorage.setItem(
+					process.env.REACT_APP_USER_TOKEN,
+					data.data.data.accessToken
+				);
+				localStorage.setItem('user', JSON.stringify(data.data.data));
+				delete data.data.data.accessToken;
+				dispatch({ type: 'LOGIN', payload: data.data.data });
+				navigate('/posts', { replace: true });
+			}
+		} catch (e) {
+			setErrorMsg('Wrong email or password');
 		}
+
+		setIsPending(false);
 	};
 
 	return (
@@ -71,6 +79,8 @@ export default function SignInForm({ setFormType, formType }) {
 						value={signInForm.password}
 					/>
 				</label>
+				{isPending && <span class='loader'></span>}
+				{errorMsg && <span className='error'>{errorMsg}</span>}
 				<button className='btn-blue'>Sign In {element}</button>
 			</form>
 		</div>

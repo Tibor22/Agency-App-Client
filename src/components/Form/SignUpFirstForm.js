@@ -2,7 +2,6 @@ import FormSignUpHeader from './FormSignUpHeader';
 import { useContext, useState } from 'react';
 import { FormContext } from '../../context/FormContext';
 import client from '../../utils/client';
-
 export default function SignUpFirstForm({
 	setFormType,
 	formType,
@@ -12,8 +11,12 @@ export default function SignUpFirstForm({
 }) {
 	const [formData, setFormData] = useContext(FormContext);
 	const [errorMsg, setErrorMsg] = useState(null);
+	const [isPending, setIsPending] = useState(false);
+
 	const next = async (e) => {
 		e.preventDefault();
+		setErrorMsg(null);
+		setIsPending(true);
 		let res;
 		try {
 			res = await client.get(`/user/${formData.email}`);
@@ -32,6 +35,7 @@ export default function SignUpFirstForm({
 				setCurrentStep((currStep += 1));
 				setErrorMsg(null);
 			}
+			setIsPending(false);
 		}
 	};
 
@@ -78,7 +82,6 @@ export default function SignUpFirstForm({
 						type='password'
 						name='password'
 						value={formData?.password}
-						minlength='4'
 						required
 					/>
 				</label>
@@ -89,10 +92,10 @@ export default function SignUpFirstForm({
 						type='password'
 						name='passwordAgain'
 						value={formData?.passwordAgain}
-						minlength='4'
 						required
 					/>
 				</label>
+				{isPending && <span class='loader'></span>}
 				{errorMsg && <span className='error'>{errorMsg}</span>}
 				<button onClick={next} className='btn-blue'>
 					Next

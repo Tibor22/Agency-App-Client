@@ -16,15 +16,15 @@ export default function AdditionalDetails({ setCurrentStep, currStep }) {
 	const [user, dispatch] = useContext(UserContext);
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [radioButton, setRadioButton] = useState({ value: 'Male' });
+	const [isPending, setIsPending] = useState(false);
 	const prev = (e) => {
 		e.preventDefault();
 		setCurrentStep((currStep -= 1));
 	};
-	console.log('radioButton', radioButton);
 	function validateInputs() {
 		if (
-			values.includes('Privacy Policy') &&
-			values.includes('Terms&Conditions')
+			values?.includes('Privacy Policy') &&
+			values?.includes('Terms&Conditions')
 		) {
 			setFormData((prevState) => {
 				return { ...prevState, terms: true, privacyPolicy: true };
@@ -39,11 +39,13 @@ export default function AdditionalDetails({ setCurrentStep, currStep }) {
 	}
 
 	const submitForm = async (e) => {
+		setErrorMsg(null);
+		setIsPending(true);
 		e.preventDefault();
-		console.log(validateInputs());
-		if (!validateInputs()) return;
-		console.log('FORM DATA BUSINESS LINE 46:', formData);
-
+		if (!validateInputs()) {
+			setIsPending(false);
+			return;
+		}
 		const userData = {
 			...formData,
 			terms: true,
@@ -52,8 +54,6 @@ export default function AdditionalDetails({ setCurrentStep, currStep }) {
 			type: 'employee',
 			gender: radioButton.value,
 		};
-
-		console.log(userData);
 
 		const data = await client.post('/user/create', userData, false);
 		if (data) {
@@ -65,9 +65,8 @@ export default function AdditionalDetails({ setCurrentStep, currStep }) {
 			localStorage.setItem('user', JSON.stringify(data.data));
 			dispatch({ type: 'LOGIN', payload: data.data });
 			navigate('/posts', { replace: true });
-
-			console.log(data.data);
 		}
+		setIsPending(false);
 	};
 
 	return (
@@ -91,6 +90,7 @@ export default function AdditionalDetails({ setCurrentStep, currStep }) {
 				</span>
 				<Checkbox values={values} setValues={setValues} />
 			</label>
+			{isPending && <span class='loader'></span>}
 			{errorMsg && <span className='error'>{errorMsg}</span>}
 			<button className='btn-blue'>Submit</button>
 			<button onClick={prev} className='btn-blue'>

@@ -10,12 +10,16 @@ export default function SignUpSecondForm({
 }) {
 	const [formData, setFormData] = useContext(FormContext);
 	const [errorMsg, setErrorMsg] = useState(null);
+	const [isPending, setIsPending] = useState(false);
 	const next = (e) => {
+		setErrorMsg(null);
 		e.preventDefault();
+		setIsPending(true);
 		if (!formData.firstName || !formData.lastName || !formData.address) {
 			setErrorMsg('Missing field(s)');
 		} else {
 			setCurrentStep((currStep += 1));
+			setIsPending(false);
 			setErrorMsg(null);
 		}
 	};
@@ -69,6 +73,7 @@ export default function SignUpSecondForm({
 						name='address'
 					/>
 				</label>
+				{isPending && <span class='loader'></span>}
 				{errorMsg && <span className='error'>{errorMsg}</span>}
 				<button onClick={next} className='btn-blue'>
 					Next
