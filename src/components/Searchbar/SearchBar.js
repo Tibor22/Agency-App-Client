@@ -6,7 +6,7 @@ export default function SearchBar() {
 			<label className='searchbar-form--controller-type'>
 				<span>Type</span>
 				<input
-					placeholder=' e.g. data-analyst'
+					placeholder=' e.g. software engineer'
 					className='input_jobtype'
 					type='text'
 				/>

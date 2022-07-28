@@ -2,6 +2,7 @@
 $color-primary: #e0edff;
 $color-primary-dark: #1f344f;
 $color-btn-primary: #eb714c;
+$color-btn-primary-light: #fbd597;
 $color-primary-hover: #61a1e1;
 $font-family-primary: 'Nunito', sans-serif;
 $font-family-title: 'Source Sans Pro', sans-serif;
@@ -16,6 +17,7 @@ $font-family-title: 'Source Sans Pro', sans-serif;
 	--color-primary-dark: #{$color-primary-dark};
 	--color-primary-hover: #{$color-primary-hover};
 	--color-btn-primary: #{$color-btn-primary};
+	--color-btn-primary-light: #{$color-btn-primary-light};
 	--font-family-primary: #{$font-family-primary};
 	--font-family-title: #{$font-family-title};
 }

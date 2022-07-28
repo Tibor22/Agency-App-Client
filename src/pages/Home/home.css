@@ -14,7 +14,7 @@
   width: 100%;
   background-color: var(--color-primary-dark);
   display: flex;
-  align-items: start;
+  align-items: center;
   padding: 3rem;
 }
 .home_showcase-intro {
