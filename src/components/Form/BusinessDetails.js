@@ -4,9 +4,14 @@ import Checkbox from '../Checkbox';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { FormContext } from '../../context/FormContext';
+import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
+import client from '../../utils/client';
 
-export default function AdditionalDetails({ setCurrentStep, currStep }) {
+export default function BusinessDetails({ setCurrentStep, currStep }) {
+	const navigate = useNavigate();
 	const [formData, setFormData] = useContext(FormContext);
+	const [user, dispatch] = useContext(UserContext);
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [values, setValues] = useState([]);
 	const prev = (e) => {
@@ -43,16 +48,33 @@ export default function AdditionalDetails({ setCurrentStep, currStep }) {
 		}
 	}
 
-	const submitForm = (e) => {
+	const submitForm = async (e) => {
 		e.preventDefault();
 		console.log(validateInputs());
 		if (!validateInputs()) return;
 		console.log('FORM DATA BUSINESS LINE 46:', formData);
 
-		console.log(formData.startOfBusiness.toISOString());
-		console.log('FORMDATA:', formData);
+		const userData = {
+			...formData,
+			terms: true,
+			privacyPolicy: true,
+			startOfBusiness: formData.startOfBusiness.toISOString(),
+			type: 'employer',
+		};
+
+		const data = await client.post('/user/create', userData, false);
+		if (data) {
+			localStorage.setItem(
+				process.env.REACT_APP_USER_TOKEN,
+				data.data.accessToken
+			);
+			delete data.data.accessToken;
+			localStorage.setItem('user', JSON.stringify(data.data));
+			dispatch({ type: 'LOGIN', payload: data.data });
+			navigate('/posts', { replace: true });
+		}
 	};
-	console.log(formData);
+
 	return (
 		<form onSubmit={submitForm} className='sign-form'>
 			<label className='form-controller'>

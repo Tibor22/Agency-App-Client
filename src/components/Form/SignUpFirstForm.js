@@ -1,6 +1,7 @@
 import FormSignUpHeader from './FormSignUpHeader';
 import { useContext, useState } from 'react';
 import { FormContext } from '../../context/FormContext';
+import client from '../../utils/client';
 
 export default function SignUpFirstForm({
 	setFormType,
@@ -11,17 +12,26 @@ export default function SignUpFirstForm({
 }) {
 	const [formData, setFormData] = useContext(FormContext);
 	const [errorMsg, setErrorMsg] = useState(null);
-	const next = (e) => {
+	const next = async (e) => {
 		e.preventDefault();
-		if (formData.password !== formData.passwordAgain) {
-			setErrorMsg('Passwords are not matching');
-		} else if (formData.password.length < 4) {
-			setErrorMsg('Passwords not long enough (min 4 characters)');
-		} else if (!validateEmail(formData.email)) {
-			setErrorMsg('Invalid Email');
-		} else {
-			setCurrentStep((currStep += 1));
-			setErrorMsg(null);
+		let res;
+		try {
+			res = await client.get(`/user/${formData.email}`);
+		} catch (err) {
+			console.log(err);
+		} finally {
+			if (formData.password !== formData.passwordAgain) {
+				setErrorMsg('Passwords are not matching');
+			} else if (formData.password.length < 4) {
+				setErrorMsg('Passwords not long enough (min 4 characters)');
+			} else if (!validateEmail(formData.email)) {
+				setErrorMsg('Invalid Email');
+			} else if (res?.status === 200) {
+				setErrorMsg('User already exist');
+			} else {
+				setCurrentStep((currStep += 1));
+				setErrorMsg(null);
+			}
 		}
 	};
 
@@ -40,7 +50,6 @@ export default function SignUpFirstForm({
 			[name]: value,
 		});
 	};
-	console.log('FORM DATA:', formData);
 
 	return (
 		<div className='signUp-form--container'>

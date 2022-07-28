@@ -1,7 +1,7 @@
 import React from 'react';
 import { RadioButtonGroup } from 'react-rainbow-components';
 
-export default function RadioButton() {
+export default function RadioButton({ radioButton, setRadioButton }) {
 	const options = [
 		{ value: 'Male', label: 'Male' },
 		{ value: 'Female', label: 'Female' },
@@ -11,18 +11,16 @@ export default function RadioButton() {
 	class LabeledBrandRadioButtonGroup extends React.Component {
 		constructor(props) {
 			super(props);
-			this.state = {
-				value: 'auto',
-			};
+
 			this.handleOnChange = this.handleOnChange.bind(this);
 		}
 
 		handleOnChange(event) {
-			return this.setState({ value: event.target.value });
+			return setRadioButton({ value: event.target.value });
 		}
 
 		render() {
-			const { value } = this.state;
+			const { value } = radioButton;
 			return (
 				<RadioButtonGroup
 					style={{ width: '70%' }}
