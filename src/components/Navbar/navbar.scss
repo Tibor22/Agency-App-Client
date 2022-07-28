@@ -1,3 +1,7 @@
+.navbar-container {
+	background-color: var(--color-primary);
+}
+
 .navbar {
 	color: #fff;
 	display: flex;
@@ -7,6 +11,9 @@
 	padding-right: 2rem;
 	max-width: 120rem;
 	margin: 0 auto;
+	position: sticky;
+	z-index: 9999999;
+
 	&_list {
 		margin-left: auto;
 		display: flex;
