@@ -1,0 +1,131 @@
+.aboutUs-container {
+  max-width: 120rem;
+  height: 150vh;
+  background-color: var(--color-primary);
+  margin: 0 auto;
+}
+
+.aboutUs {
+  display: flex;
+  align-items: center;
+}
+.aboutUs_desc {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.aboutUs_desc--header {
+  font-size: 4rem;
+  width: 70%;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.aboutUs_desc--text {
+  width: 70%;
+  font-size: 1.5rem;
+}
+.aboutUs_image--container {
+  width: 40%;
+}
+
+.who-we-are {
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-btn-primary-light);
+  max-height: 30rem;
+}
+.who-we-are_desc {
+  font-style: italic;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  transform: translate(-10rem, -6rem);
+  background-color: rgb(255, 255, 255);
+  color: rgb(109, 109, 109);
+  height: 100%;
+  box-shadow: 4px 6px 15px -2px rgba(0, 0, 0, 0.79);
+}
+.who-we-are_desc--header {
+  font-size: 4rem;
+  width: 85%;
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+  color: black;
+  font-style: unset;
+}
+.who-we-are_desc--text {
+  width: 85%;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.who-we-are_image--container {
+  width: 40%;
+}
+
+.what-we-do {
+  margin-top: 20rem;
+  padding-bottom: 10rem;
+  background-color: var(--color-primary);
+}
+.what-we-do_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  color: white;
+  border-radius: 10px;
+  width: 23rem;
+  background: rgb(31, 52, 79);
+  background: linear-gradient(180deg, rgb(31, 52, 79) 44%, rgb(97, 161, 225) 100%);
+  box-shadow: 5px 5px 14px 3px rgba(0, 0, 0, 0.33);
+}
+.what-we-do_card--header {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+.what-we-do_card--text {
+  font-size: 1.3rem;
+  padding: 1.5rem;
+  text-align: center;
+}
+.what-we-do_card img {
+  margin: 1rem 0rem 1rem 0rem;
+}
+.what-we-do_header {
+  text-align: center;
+  margin-bottom: 5rem;
+  font-size: 4.5rem;
+  font-weight: 500;
+}
+
+.cards {
+  display: flex;
+  gap: 12rem;
+  justify-content: center;
+  position: relative;
+}
+.cards::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  -webkit-clip-path: polygon(49% 0, 0 100%, 5% 100%, 49% 8%, 73% 58%, 81% 75%, 95% 100%, 94% 100%, 100% 99%, 74% 50%);
+          clip-path: polygon(49% 0, 0 100%, 5% 100%, 49% 8%, 73% 58%, 81% 75%, 95% 100%, 94% 100%, 100% 99%, 74% 50%);
+  width: 50%;
+  bottom: 0%;
+  left: 0;
+  background-color: var(--color-btn-primary);
+}
+.cards::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  -webkit-clip-path: polygon(49% 0, 0 100%, 5% 100%, 49% 8%, 73% 58%, 81% 75%, 95% 100%, 94% 100%, 100% 99%, 74% 50%);
+          clip-path: polygon(49% 0, 0 100%, 5% 100%, 49% 8%, 73% 58%, 81% 75%, 95% 100%, 94% 100%, 100% 99%, 74% 50%);
+  width: 50%;
+  bottom: 0%;
+  right: 0;
+  background-color: var(--color-btn-primary);
+}/*# sourceMappingURL=aboutUs.css.map */
