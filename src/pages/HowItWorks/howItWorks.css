@@ -1,4 +1,5 @@
 .how-it-works-outer-container {
+  overflow: hidden;
   background: rgb(224, 237, 255);
   background: linear-gradient(180deg, rgb(224, 237, 255) 44%, rgb(235, 113, 76) 100%);
 }
@@ -83,7 +84,6 @@
   top: 20%;
 }
 .second-step {
-  height: 50vh;
   width: 100%;
 }
 .second-step_middle--header {
@@ -100,10 +100,31 @@
   width: 80%;
   height: 80%;
 }
+.second-step_left {
+  display: flex;
+  align-items: flex-end;
+}
 
 .third-step {
-  height: 50vh;
   width: 100%;
+  height: 100%;
+}
+.third-step_left img {
+  height: 95%;
+}
+.third-step_right {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.third-step_right img {
+  position: absolute;
+  z-index: 9999999999;
+  transform: translate(-8%, -64%);
+}
+.third-step_right .shout {
+  transform: translate(-10%, -70%);
 }
 
 .small-circle {
@@ -115,8 +136,9 @@
   box-shadow: 3px 3px 8px 0px #000000;
 }
 
-body {
-  background-color: #66d0ff;
+.accepted {
+  display: flex;
+  justify-content: center;
 }
 
 .cloud {
@@ -130,6 +152,9 @@ body {
   font-size: 1.4rem;
   position: relative;
   z-index: 10;
+}
+.cloud h2 {
+  margin-bottom: 0.9rem;
 }
 
 .cloud::after,
