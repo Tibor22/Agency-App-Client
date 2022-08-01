@@ -1,14 +1,22 @@
 import './searchBar.css';
 
-export default function SearchBar() {
+export default function SearchBar({
+	handleSubmit,
+	setQuery,
+	query,
+	handleSearch,
+}) {
 	return (
-		<form className='searchbar-form'>
+		<form onSubmit={handleSubmit} className='searchbar-form'>
 			<label className='searchbar-form--controller-type'>
 				<span>Type</span>
 				<input
 					placeholder=' e.g. software engineer'
 					className='input_jobtype'
 					type='text'
+					name='type'
+					onChange={handleSearch}
+					value={query?.type}
 				/>
 			</label>
 			<label className='searchbar-form--controller-location'>
@@ -17,6 +25,9 @@ export default function SearchBar() {
 					className='input_location'
 					placeholder=' e.g. London'
 					type='text'
+					name='location'
+					onChange={handleSearch}
+					value={query?.location}
 				/>
 			</label>
 			<div className='btn-container'>

@@ -78,6 +78,16 @@ export default function BusinessDetails({ setCurrentStep, currStep }) {
 			setIsPending(false);
 			navigate('/posts', { replace: true });
 		}
+		setFormData({
+			firstName: '',
+			lastName: '',
+			email: '',
+			password: '',
+			passwordAgain: '',
+			address: '',
+			terms: '',
+			privacyPolicy: '',
+		});
 		setIsPending(false);
 	};
 

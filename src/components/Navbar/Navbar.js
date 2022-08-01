@@ -2,6 +2,9 @@ import './navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignIn } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
+import client from '../../utils/client';
 
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
@@ -10,11 +13,12 @@ export default function Navbar() {
 	const element = <FontAwesomeIcon icon={faSignIn} />;
 	const name = JSON.parse(localStorage.getItem('user'));
 	const navigate = useNavigate();
-
+	const [user, dispatch] = useContext(UserContext);
 	const signOut = () => {
 		if (name) {
 			localStorage.removeItem(process.env.REACT_APP_USER_TOKEN);
 			localStorage.removeItem('user');
+			dispatch({ type: 'LOGOUT', payload: '' });
 			navigate('/', { replace: true });
 		}
 	};

@@ -2,8 +2,26 @@ import './home.css';
 import home from '../../assets/home.png';
 import power2 from '../../assets/power2.png';
 import SearchBar from '../../components/Searchbar/SearchBar.js';
-
+import { useState } from 'react';
+import { useContext } from 'react';
+import { PostsContext } from '../../context/PostsContext';
+import { useNavigate } from 'react-router-dom';
 export default function Home() {
+	const [query, setQuery] = useState({ type: '', location: '' });
+	const [postsQuery, setPostsQuery] = useContext(PostsContext);
+	const navigate = useNavigate();
+
+	const handleSearch = async (e) => {
+		const { name, value } = e.target;
+		setQuery({ ...query, [name]: value });
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setPostsQuery(query);
+		navigate('/posts', { replace: true });
+	};
+
 	return (
 		<div className='home-container'>
 			<div className='home'>
@@ -29,7 +47,11 @@ export default function Home() {
 							</div>
 						</div>
 						<div className='search-bar'>
-							<SearchBar />
+							<SearchBar
+								handleSubmit={handleSubmit}
+								query={query}
+								handleSearch={handleSearch}
+							/>
 						</div>
 					</div>
 					<div className='home_showcase-image'>

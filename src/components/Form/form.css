@@ -238,4 +238,33 @@
   100% {
     transform: rotateY(3600deg);
   }
+}
+#datePicker-1 input {
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  margin-top: 1rem;
+}
+
+input::-webkit-file-upload-button {
+  font-weight: bold;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: thin solid var(--color-btn-primary);
+  border-radius: 3px;
+  background-color: var(--color-btn-primary);
+  cursor: pointer;
+}
+
+input::file-selector-button {
+  font-weight: bold;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: thin solid var(--color-btn-primary);
+  border-radius: 3px;
+  background-color: var(--color-btn-primary);
+  cursor: pointer;
 }/*# sourceMappingURL=form.css.map */

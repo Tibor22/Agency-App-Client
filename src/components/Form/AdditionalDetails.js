@@ -66,6 +66,16 @@ export default function AdditionalDetails({ setCurrentStep, currStep }) {
 			dispatch({ type: 'LOGIN', payload: data.data });
 			navigate('/posts', { replace: true });
 		}
+		setFormData({
+			firstName: '',
+			lastName: '',
+			email: '',
+			password: '',
+			passwordAgain: '',
+			address: '',
+			terms: '',
+			privacyPolicy: '',
+		});
 		setIsPending(false);
 	};
 

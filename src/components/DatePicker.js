@@ -1,26 +1,34 @@
 import React from 'react';
-import { useState } from 'react';
 import { DatePicker } from 'react-rainbow-components';
 
-export default function DatePickerFunc({ setErrorMsg, setFormData, formData }) {
+export default function DatePickerFunc({
+	setErrorMsg,
+	setFormData,
+	formData,
+	dateName,
+}) {
 	const containerStyles = {
 		maxWidth: 400,
 	};
 
-	const dateType = formData.type === 'employer' ? 'startOfBusiness' : 'DoB';
+	let dateType;
+
+	if (formData?.type) {
+		dateType = formData.type === 'employer' ? 'startOfBusiness' : 'DoB';
+	} else {
+		dateType = dateName;
+	}
 
 	return (
 		<div>
-			<div
-				className='rainbow-align-content_center rainbow-m-vertical_large rainbow-p-horizontal_small rainbow-m_auto'
-				style={containerStyles}
-			>
+			<div className='date-picker' style={containerStyles}>
 				<DatePicker
 					id='datePicker-1'
-					value={formData[dateType]}
+					value={formData[dateType] || new Date()}
 					onChange={(value) => setFormData({ ...formData, [dateType]: value })}
 					label=''
 					formatStyle='large'
+					minDate={dateName && new Date()}
 				/>
 			</div>
 		</div>

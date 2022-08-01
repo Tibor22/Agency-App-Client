@@ -1,0 +1,130 @@
+.jobForm-outer-container {
+	background: rgb(235, 113, 76);
+	background: linear-gradient(
+		333deg,
+		rgba(235, 113, 76, 1) 0%,
+		rgb(140, 183, 225) 100%
+	);
+	min-height: 100vh;
+}
+
+.jobForm-container {
+	max-width: 120rem;
+	padding-top: 2rem;
+	color: white;
+	font-style: italic;
+	margin: 0 auto;
+	display: flex;
+
+	&--header {
+		font-size: 4rem;
+		text-align: center;
+		padding: 30px 0 8px;
+		position: relative;
+		transform: translateX(-10rem);
+	}
+}
+
+.jobForm-span {
+	display: inline-block;
+	transform: translate(50%, -1rem);
+	font-weight: 600;
+
+	&::before {
+		content: '';
+		position: absolute;
+		right: -50%;
+		bottom: 0px;
+		width: 250px;
+		height: 14px;
+		transform: skew(-12deg) translateX(-50%);
+		background: var(--color-btn-primary);
+		opacity: 0.5;
+		z-index: 1;
+	}
+}
+
+.jobForm-inner-container {
+	height: 100%;
+	display: flex;
+	flex-direction: row-reverse;
+	margin: 0 auto;
+	justify-content: center;
+	border: 3px solid var(--color-btn-primary);
+	padding: 3rem;
+	border-radius: 8px;
+	-webkit-box-shadow: 4px 7px 21px -5px rgba(0, 0, 0, 0.4);
+	box-shadow: 4px 7px 21px -5px rgba(0, 0, 0, 0.4);
+	margin-bottom: 3rem;
+}
+
+.jobForm {
+	// background-color: var(--color-btn-primary-light);
+	padding: 1.5rem;
+
+	&-controller {
+		display: block;
+		width: 100%;
+
+		& input {
+			padding: 1.4rem;
+			width: 100%;
+			border-radius: 6px;
+			border: none;
+			margin-bottom: 1rem;
+		}
+		& span {
+			display: block;
+			font-size: 1.3rem;
+			margin-bottom: 0.5rem;
+		}
+
+		& textarea {
+			width: 100%;
+			border-radius: 6px;
+			padding: 2rem;
+			font-size: 1.4rem;
+		}
+	}
+	&-controller.sm {
+		width: 100%;
+		display: inline;
+
+		& input {
+			padding: 1.4rem;
+			width: 100%;
+			margin-bottom: 1rem;
+		}
+		& span {
+			display: block;
+			font-size: 1.3rem;
+			margin-bottom: 0.5rem;
+		}
+	}
+
+	&-flex-container {
+		display: flex;
+		gap: 1rem;
+	}
+
+	&-image {
+		// border: 2px solid black;
+		// background-color: var(--color-btn-primary);
+	}
+}
+
+.btn-jobPost {
+	width: 50%;
+	padding: 1.1rem;
+	background-color: var(--color-btn-primary);
+	color: white;
+	border: none;
+	margin-top: 1rem;
+	transition: all 0.3s;
+	&:hover {
+		transform: translateY(-2px);
+		scale: 1.1;
+		background-color: var(--color-btn-primary-hover);
+		cursor: pointer;
+	}
+}

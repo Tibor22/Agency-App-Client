@@ -3,11 +3,12 @@ const host = process.env.REACT_APP_API_URL;
 const tokenKey = process.env.REACT_APP_USER_TOKEN;
 
 const client = {
-	get: (path) => {
+	get: (path, withToken = true) => {
 		const url = `${host}${path}`;
-		const headers = {
-			Authorization: `Bearer ${localStorage.getItem(tokenKey)}`,
-		};
+		let headers = {};
+		if (withToken) {
+			headers['Authorization'] = `Bearer ${localStorage.getItem(tokenKey)}`;
+		}
 
 		return axios.get(url, { headers });
 	},

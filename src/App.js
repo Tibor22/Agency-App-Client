@@ -12,13 +12,16 @@ import JobPost from './pages/JobPost/JobPost';
 import Posts from './pages/Posts/Posts';
 import Navbar from './components/Navbar/Navbar';
 import SignIn from './pages/SignIn/SignIn';
+import SideBar from './components/SideBar/SideBar';
+import JobForm from './pages/JobForm/JobForm';
 
 function App() {
-	const [user, isLoggedIn] = useContext(UserContext);
-
+	const [user, dispatch] = useContext(UserContext);
+	console.log(user);
 	return (
 		<BrowserRouter>
 			<Navbar />
+			{user.isLoggedIn && <SideBar />}
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='/contact' element={<ContactUs />} />
@@ -28,6 +31,9 @@ function App() {
 				<Route path='/posts' element={<Posts />} />
 				<Route path='/posts/:id' element={<JobPost />} />
 				<Route path='/sign-in/:type' element={<SignIn />} />
+				{user.isLoggedIn && user.user.type === 'employer' && (
+					<Route path='/jobPost' element={<JobForm />} />
+				)}
 			</Routes>
 		</BrowserRouter>
 	);

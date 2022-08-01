@@ -1,5 +1,9 @@
 .navbar-container {
   background-color: var(--color-primary);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 9999999;
 }
 
 .navbar {
@@ -13,6 +17,7 @@
   margin: 0 auto;
   position: -webkit-sticky;
   position: sticky;
+  top: 0;
   z-index: 9999999;
 }
 .navbar_list {
