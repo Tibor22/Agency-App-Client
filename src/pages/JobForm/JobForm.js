@@ -4,6 +4,7 @@ import { useState } from 'react';
 import UploadImage from '../../components/UploadImage/UploadImage';
 import client from '../../utils/client';
 import jobFormLG from '../../assets/jobFormLG.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function JobForm() {
 	const [formData, setFormData] = useState({
@@ -17,6 +18,8 @@ export default function JobForm() {
 		numOfApplicants: '',
 		file: '',
 	});
+	let navigate = useNavigate();
+	const [loading, setLoading] = useState(null);
 
 	const styles = {
 		display: 'inline-block',
@@ -32,7 +35,7 @@ export default function JobForm() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		setLoading(true);
 		const myRenamedFile = new File(
 			[formData.file],
 			`${formData.file.name}${String(Math.random())}.png`
@@ -55,6 +58,8 @@ export default function JobForm() {
 			method: 'POST',
 			body: formData1,
 		});
+		setLoading(false);
+		navigate('/posts', { replace: true });
 	};
 
 	return (
@@ -171,6 +176,12 @@ export default function JobForm() {
 						src='http://localhost:4000/images/user (1).png0.25472359196203986.png'
 						alt=''
 					/> */}
+
+					{loading && (
+						<div className='loader-container-form'>
+							<div className='loader'></div>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

@@ -1,60 +1,42 @@
 import './profile.css';
 import client from '../../utils/client';
 import { useEffect, useState } from 'react';
+import EmployeeProfile from '../../components/Profiles/EmployeeProfile';
+import EmployerProfile from '../../components/Profiles/EmployerProfile';
 
 export default function Profile() {
+	const currUser = JSON.parse(localStorage.getItem('user'));
 	const [user, setUser] = useState(null);
+	const [isLoading, setIsLoading] = useState(null);
+	console.log(currUser);
 
 	useEffect(() => {
-		client.get();
+		if (currUser) {
+			setIsLoading(true);
+			const getUser = async () => {
+				const res = await client.get(`/user/find/${currUser.userId}`);
+				console.log(res.data);
+				setUser(res.data);
+				setIsLoading(false);
+			};
+			getUser();
+		}
 	}, []);
 
 	return (
 		<div className='profile-outer-container'>
 			<div className='profile-inner-container'>
-				<div className='profile'>
-					<div className='profile-img-container'></div>
-					<div className='profile-details'>
-						<div className='profile-controller'>
-							<span>First Name</span>
-							<div className='profile-controller--details'>Dummy</div>
-							<div className='btn-edit'>Edit</div>
-						</div>
-						<div className='profile-controller'>
-							<span>Last Name</span>
-							<div className='profile-controller--details'>Dummy</div>
-							<div className='btn-edit'>Edit</div>
-						</div>
-						<div className='profile-controller'>
-							<span>Date of Birth</span>
-							<div className='profile-controller--details'>Dummy</div>
-							<div className='btn-edit'>Edit</div>
-						</div>
-						<div className='profile-controller'>
-							<span>Address</span>
-							<div className='profile-controller--details'>Dummy</div>
-							<div className='btn-edit'>Edit</div>
-						</div>
-						<div className='profile-controller'>
-							<span>Phone Number</span>
-							<div className='profile-controller--details'>Dummy</div>
-							<div className='btn-edit'>Edit</div>
-						</div>
-						<div className='profile-controller'>
-							<span>Bio</span>
-							<div className='profile-controller--details bio'>
-								Lorem ipsum dolor sit amet... &nbsp;<span>Read More</span>
-							</div>
-							<div className='btn-edit'>Edit</div>
-						</div>
-						{/* <div className='profile-controller'>
-							<span>Date of Birth</span>
-							<div className='profile-controller--details'></div>
-							<div className='btn-edit'>Edit</div>
-						</div> */}
+				{isLoading && (
+					<div className='loader-container'>
+						<div className='loader'></div>
 					</div>
-				</div>
-				PROFILE PAGE
+				)}
+				{currUser.type === 'employer' && user && (
+					<EmployerProfile user={user} setUser={setUser} />
+				)}
+				{currUser.type === 'employee' && user && (
+					<EmployeeProfile user={user} setUser={setUser} />
+				)}
 			</div>
 		</div>
 	);

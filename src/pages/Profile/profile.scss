@@ -1,5 +1,10 @@
 .profile-outer-container {
-	background-color: var(--color-primary);
+	background: rgb(224, 237, 255);
+	background: linear-gradient(
+		333deg,
+		rgba(224, 237, 255, 1) 0%,
+		rgba(31, 52, 79, 1) 100%
+	);
 	height: calc(100vh - 6rem);
 	display: grid;
 	place-items: center;
@@ -9,24 +14,68 @@
 	max-width: 120rem;
 	width: 80rem;
 	height: 60rem;
-	border: 3px solid red;
-	// background-color: var(--color-primary-dark);
+	position: relative;
+
+	background-color: var(--color-primary);
+	border-radius: 8px;
 }
 
 .profile {
 	display: flex;
 	width: 100%;
 	height: 100%;
-	&-img-container {
+	position: relative;
+	z-index: 2;
+	-webkit-box-shadow: 10px 10px 9px -2px rgba(0, 0, 0, 0.61);
+	box-shadow: 10px 10px 9px -2px rgba(0, 0, 0, 0.61);
+	border-radius: 8px;
+	&-img {
 		height: 100%;
-		border: 1px solid black;
+
 		width: 40%;
+
+		&-container {
+			height: 50%;
+			width: 100%;
+
+			display: grid;
+			place-items: center;
+			position: relative;
+
+			&--rating {
+				& span {
+					font-size: 1.3rem;
+					font-style: italic;
+				}
+				position: absolute;
+				right: 0;
+				bottom: 5rem;
+				font-size: 2rem;
+				font-weight: 700;
+			}
+
+			& img {
+				object-fit: cover;
+				align-self: center;
+				justify-self: center;
+				max-width: 200px;
+				max-height: 200px;
+				object-fit: cover;
+			}
+		}
+	}
+
+	&-upload-image {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		margin-top: -3rem;
 	}
 
 	&-details {
-		// background-color: red;
 		width: 60%;
 		padding-top: 1.5rem;
+		border-radius: 8px;
 	}
 
 	&-controller {
@@ -39,11 +88,13 @@
 		background-color: white;
 		padding: 1rem;
 		border-radius: 8px;
+
 		& span {
 			font-size: 1.5rem;
 			grid-column: 1/3;
 			grid-row: 1;
 			font-style: italic;
+			color: var(--color-btn-primary);
 		}
 
 		&--details {
@@ -61,6 +112,29 @@
 			justify-self: flex-end;
 			margin-right: 1rem;
 			cursor: pointer;
+			font-size: 1.2rem;
+			transition: transform 0.3s;
+			&:hover {
+				opacity: 0.8;
+				color: green;
+				transform: scale(1.2);
+			}
 		}
 	}
+
+	&-controller--details.business {
+		font-size: 1.4rem;
+		font-weight: bold;
+	}
+}
+
+#profile-details-empty {
+	color: var(--color-primary-hover);
+	font-weight: 400;
+}
+
+.loader-container {
+	height: 100%;
+	display: grid;
+	place-items: center;
 }

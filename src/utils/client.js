@@ -3,7 +3,7 @@ const host = process.env.REACT_APP_API_URL;
 const tokenKey = process.env.REACT_APP_USER_TOKEN;
 
 const client = {
-	get: (path, withToken = true) => {
+	get: (path, withToken = true, params) => {
 		const url = `${host}${path}`;
 		let headers = {};
 		if (withToken) {
