@@ -14,6 +14,7 @@ import Navbar from './components/Navbar/Navbar';
 import SignIn from './pages/SignIn/SignIn';
 import SideBar from './components/SideBar/SideBar';
 import JobForm from './pages/JobForm/JobForm';
+import Profile from './pages/Profile/Profile';
 
 function App() {
 	const [user, dispatch] = useContext(UserContext);
@@ -34,6 +35,7 @@ function App() {
 				{user.isLoggedIn && user.user.type === 'employer' && (
 					<Route path='/jobPost' element={<JobForm />} />
 				)}
+				{user.isLoggedIn && <Route path='/profile' element={<Profile />} />}
 			</Routes>
 		</BrowserRouter>
 	);

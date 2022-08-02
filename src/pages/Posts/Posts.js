@@ -96,7 +96,10 @@ export default function Posts() {
 							<DatePickerFunc
 								formData={formData}
 								setFormData={setFormData}
+								setQuery={setQuery}
 								dateName={'jobStart'}
+								setPageNumber={setPageNumber}
+								query={query}
 							/>
 						</form>
 					</div>

@@ -37,9 +37,9 @@ export default function SideBar() {
 			</div>
 			<ul className='sideBar-list'>
 				<li className='sideBar-list_item'>
-					<a href=''>
+					<Link to='/profile'>
 						<img src={userSM} alt='profile' title='profile' />
-					</a>
+					</Link>
 				</li>
 				<li className='sideBar-list_item'>
 					{user.user.type === 'employer' && (

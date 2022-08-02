@@ -22,7 +22,9 @@ export default function usePostsSearch(query, pageNumber) {
 				process.env.REACT_APP_API_URL
 			}/posts?pageNumber=${pageNumber}&location=${query?.location || ''}&type=${
 				query?.type || ''
-			}&gte=${query?.gte || '1'}&lte=${query?.lte || '30'}`,
+			}&gte=${query?.gte || '1'}&lte=${
+				query?.lte || '30'
+			}&gteDate=${query?.jobStart?.toISOString()}`,
 
 			cancelToken: new axios.CancelToken((c) => (cancel = c)),
 		})

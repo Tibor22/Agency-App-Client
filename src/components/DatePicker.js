@@ -4,8 +4,11 @@ import { DatePicker } from 'react-rainbow-components';
 export default function DatePickerFunc({
 	setErrorMsg,
 	setFormData,
+	setQuery,
 	formData,
 	dateName,
+	setPageNumber,
+	query,
 }) {
 	const containerStyles = {
 		maxWidth: 400,
@@ -19,13 +22,21 @@ export default function DatePickerFunc({
 		dateType = dateName;
 	}
 
+	const handleChange = function (value) {
+		setFormData({ ...formData, [dateType]: value });
+		if (setQuery) {
+			setQuery({ ...query, [dateType]: value });
+			setPageNumber(0);
+		}
+	};
+
 	return (
 		<div>
 			<div className='date-picker' style={containerStyles}>
 				<DatePicker
 					id='datePicker-1'
 					value={formData[dateType] || new Date()}
-					onChange={(value) => setFormData({ ...formData, [dateType]: value })}
+					onChange={(value) => handleChange(value)}
 					label=''
 					formatStyle='large'
 					minDate={dateName && new Date()}
