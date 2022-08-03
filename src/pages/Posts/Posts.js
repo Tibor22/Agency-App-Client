@@ -10,6 +10,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import usePostsSearch from '../../hooks/usePostsSearch';
 import { useContext } from 'react';
 import { PostsContext } from '../../context/PostsContext';
+import JobPost from '../../pages/JobPost/JobPost';
 
 export default function Posts() {
 	const [formData, setFormData] = useState('');
@@ -145,7 +146,8 @@ export default function Posts() {
 												<div className='company-salary'>
 													£{post.salary} / hour
 												</div>
-												<div className='company-details-btn'>More details</div>
+												<JobPost post={post} />
+												{/* <div className='company-details-btn'>More details</div> */}
 											</div>
 										</div>
 									);
@@ -184,7 +186,8 @@ export default function Posts() {
 												<div className='company-salary'>
 													£{post.salary} / hour
 												</div>
-												<div className='company-details-btn'>More details</div>
+												{/* <div className='company-details-btn'>More details</div> */}
+												<JobPost post={post} />
 											</div>
 										</div>
 									);
