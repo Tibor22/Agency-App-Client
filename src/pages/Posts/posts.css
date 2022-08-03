@@ -60,6 +60,9 @@
   background-color: rgb(244, 244, 244);
   padding: 1.4rem;
   box-shadow: 8px 8px 10px -7px rgba(0, 0, 0, 0.49);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .posts-container_posts--card .company-main {
   grid-column: 1/3;
@@ -91,8 +94,8 @@
 }
 .posts-container_posts--card--title {
   font-size: 3rem;
-  margin-top: 2.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .posts-container_posts--card .company-salary {
   font-size: 2rem;
@@ -100,13 +103,12 @@
 }
 .posts-container_posts--card .company-workingHours {
   grid-column: 1/3;
-  align-self: flex-end;
 }
 .posts-container_posts--card .more-details {
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
-  align-self: flex-start;
+  align-self: space-between;
 }
 .posts-container_posts--card .more-details .company-details-btn {
   padding: 0.6rem 1.5rem;
@@ -114,6 +116,11 @@
   border-radius: 4px;
   color: white;
   cursor: pointer;
+  transition: all 0.3s;
+}
+.posts-container_posts--card .more-details .company-details-btn:hover {
+  background-color: var(--color-btn-primary-hover);
+  transform: translateY(-2px);
 }
 
 .loader-container {

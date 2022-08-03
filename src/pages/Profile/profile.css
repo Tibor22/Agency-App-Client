@@ -47,13 +47,13 @@
   font-style: italic;
 }
 .profile-img-container img {
-  -o-object-fit: cover;
-     object-fit: cover;
+  border-radius: 50%;
   align-self: center;
   justify-self: center;
   max-width: 200px;
-  max-height: 200px;
-  object-fit: cover;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .profile-upload-image {
   display: flex;
@@ -137,6 +137,7 @@
   transform: translateY(1.5rem);
   font-size: 1.3rem;
   transition: transform 0.3s;
+  z-index: 99;
 }
 .upload-image:hover {
   color: green;

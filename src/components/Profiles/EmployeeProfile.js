@@ -2,22 +2,60 @@ import DateFormatter from '../../utils/DateFormatter';
 import profileIMG from '../../assets/profileIMG.png';
 import UploadImage from '../UploadImage/UploadImage';
 import { DatePicker } from 'react-rainbow-components';
+import client from '../../utils/client';
 
 export default function EmployeeProfile({
+	currUser,
 	user,
 	setUser,
-	handleClick,
-	handleChange,
 	checkUser,
+	setCheckUser,
 	uploadImage,
 	setUploadProfileImage,
 	uploadProfileImage,
 }) {
+	const handleChange = async (e) => {
+		if (typeof e.getMonth === 'function') {
+			const value = e.toISOString();
+
+			setUser({
+				...user,
+				employeeProfile: { ...user.employeeProfile, ['DoB']: value },
+			});
+		} else {
+			const { value, name } = e.target;
+			console.log(value, name);
+			setUser({
+				...user,
+				employeeProfile: { ...user.employeeProfile, [name]: value },
+			});
+		}
+	};
+
+	const handleClick = async (e) => {
+		const name = e.target.getAttribute('name');
+		setCheckUser({ ...checkUser, [name]: !checkUser[name] });
+
+		console.log(e.target.innerText === 'Save');
+
+		const dataToSend = { [name]: user.employeeProfile[name] };
+
+		console.log(dataToSend);
+
+		if (e.target.innerText === 'Save') {
+			const res = await client.patch(
+				`/user/profile/update/${currUser.userId}`,
+				dataToSend
+			);
+		}
+	};
+
 	return (
 		<div className='profile'>
 			<div className='profile-img'>
 				<div className='profile-img-container'>
 					<img
+						className='profileImg'
 						src={
 							`http://localhost:4000/images/${user.employeeProfile.profileImgUrl}` || {
 								profileIMG,
