@@ -34,6 +34,20 @@ export default function SignInForm({ setFormType, formType }) {
 				);
 				localStorage.setItem('user', JSON.stringify(data.data.data));
 				delete data.data.data.accessToken;
+
+				if (data.data.data.type === 'employee') {
+					const res = await client.get(
+						`/user/find/${data.data.data.userId}?include=true&profileId=${data.data.data.profileId}`
+					);
+					console.log(res);
+					data.data.data.jobPosts = res.data.jobPosts;
+				} else if (data.data.data.type === 'employer') {
+					const res = await client.get(
+						`/user/find/${data.data.data.userId}?include=true`
+					);
+					data.data.data.jobPosts = res.data.employerProfile.jobPost;
+				}
+
 				dispatch({ type: 'LOGIN', payload: data.data.data });
 				navigate('/posts', { replace: true });
 			}

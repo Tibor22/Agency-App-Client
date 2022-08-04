@@ -10,12 +10,15 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import usePostsSearch from '../../hooks/usePostsSearch';
 import { useContext } from 'react';
 import { PostsContext } from '../../context/PostsContext';
+import { UserContext } from '../../context/UserContext';
 import JobPost from '../../pages/JobPost/JobPost';
+import JobPostCard from '../../components/JobPostCard';
 
 export default function Posts() {
 	const [formData, setFormData] = useState('');
 	const location = <FontAwesomeIcon icon={faLocationDot} />;
 	const [postsQuery, setPostsQuery] = useContext(PostsContext);
+	const [state, dispatch] = useContext(UserContext);
 	const [query, setQuery] = useState(postsQuery);
 	const [pageNumber, setPageNumber] = useState(0);
 	const { posts, hasMore, loading, error } = usePostsSearch(query, pageNumber);
@@ -108,11 +111,20 @@ export default function Posts() {
 						{posts &&
 							posts.map((post, i) => {
 								if (posts.length === i + 1) {
+									const answer = state?.user.jobPosts
+										? state.user.jobPosts.some(
+												(jobPost) => jobPost.id === post.id
+										  )
+										: false;
+
+									console.log(answer);
 									return (
 										<div
 											ref={lastPostElementRef}
 											key={i}
-											className='posts-container_posts--card'
+											className={`posts-container_posts--card ${
+												answer ? 'green' : ''
+											}`}
 										>
 											<div className='company-main'>
 												<div className='company-logo'>
@@ -140,57 +152,17 @@ export default function Posts() {
 											<div className='company-endDate'>
 												To: {DateFormatter(post.endDate)}
 											</div>
-											{/* <div className='company-weekend'>Saturday include: yes</div>
-								<div className='company-weekend'>Sunday include: no</div> */}
+
 											<div className='more-details'>
 												<div className='company-salary'>
 													£{post.salary} / hour
 												</div>
 												<JobPost post={post} />
-												{/* <div className='company-details-btn'>More details</div> */}
 											</div>
 										</div>
 									);
 								} else {
-									return (
-										<div key={i} className='posts-container_posts--card'>
-											<div className='company-main'>
-												<div className='company-logo'>
-													<img
-														src={`http://localhost:4000${post.imageUrl}`}
-														alt=''
-													/>
-												</div>
-												<div className='name-address-flex'>
-													<div className='company-name'>{post.companyName}</div>
-													<div className='company-address'>
-														{location} {post.location}
-													</div>
-												</div>
-											</div>
-											<div className='posts-container_posts--card--title'>
-												{post.jobType}
-											</div>
-											<div className='company-workingHours'>
-												Working hours: {post.timeFrame}
-											</div>
-											<div className='company-startDate'>
-												From: {DateFormatter(post.startDate)}{' '}
-											</div>
-											<div className='company-endDate'>
-												To: {DateFormatter(post.endDate)}
-											</div>
-											{/* <div className='company-weekend'>Saturday include: yes</div>
-							<div className='company-weekend'>Sunday include: no</div> */}
-											<div className='more-details'>
-												<div className='company-salary'>
-													£{post.salary} / hour
-												</div>
-												{/* <div className='company-details-btn'>More details</div> */}
-												<JobPost post={post} />
-											</div>
-										</div>
-									);
+									return <JobPostCard key={i} post={post} />;
 								}
 							})}
 						<div className='loader-container'>

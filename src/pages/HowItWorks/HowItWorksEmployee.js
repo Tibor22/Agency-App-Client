@@ -59,6 +59,7 @@ export default function HowItWorksEmployee() {
 				<div className='second-step three-column-grid'>
 					<div className='second-step_left'>
 						<div className='speech-bubble'>Upload Documents</div>
+						{/* <img src={uploadDOC} alt='' /> */}
 						<div className='cloud'>
 							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum
 							unde labore doloribus quo magnam sit ex consequuntur porro quidem

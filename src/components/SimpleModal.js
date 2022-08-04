@@ -1,7 +1,28 @@
 import React from 'react';
 import { Modal, Button } from 'react-rainbow-components';
+import party from '../assets/party.png';
 
-export default function SimpleModal() {
+import client from '../utils/client';
+
+export default function SimpleModal({ setHideModal, post }) {
+	const currUser = JSON.parse(localStorage.getItem('user'));
+	const modalContainer = {
+		padding: '40px',
+		display: 'flex',
+		alignItems: 'center',
+		gap: '2rem',
+		fontSize: 20,
+	};
+
+	const yesBtn = {
+		textAlign: 'center',
+		fontSize: 15,
+		padding: '4px 26px',
+		backgroundColor: '#5ae717',
+		color: 'white',
+		border: 'none',
+	};
+
 	class EmptyModal extends React.Component {
 		constructor(props) {
 			super(props);
@@ -12,11 +33,24 @@ export default function SimpleModal() {
 			this.handleOnClose = this.handleOnClose.bind(this);
 		}
 
-		handleOnClick() {
+		async handleOnClick() {
+			console.log('clicked', post);
+
+			const dataToSend = {
+				postId: post.id,
+				profileId: currUser.profileId,
+			};
+
+			const res = await client.post(
+				`/user/profile/connect-profile/${currUser.userId}`,
+				dataToSend
+			);
+
 			return this.setState({ isOpen: true });
 		}
 
 		handleOnClose() {
+			setHideModal({ modal: true });
 			return this.setState({ isOpen: false });
 		}
 
@@ -27,7 +61,8 @@ export default function SimpleModal() {
 					<Button
 						id='button-1'
 						variant='neutral'
-						label='Open Modal'
+						label='YES'
+						style={yesBtn}
 						onClick={this.handleOnClick}
 					/>
 					<Modal
@@ -35,11 +70,9 @@ export default function SimpleModal() {
 						isOpen={isOpen}
 						onRequestClose={this.handleOnClose}
 					>
-						<img
-							src='images/illustrations/Illustration-rainbow-1.svg'
-							className='rainbow-p-around_xx-large rainbow-m_auto rainbow-align-content_center'
-							alt='landscape with rainbows, birds and colorful balloons'
-						/>
+						<h1 style={modalContainer}>
+							Congratulations! Job Accepted <img src={party} alt='' />
+						</h1>
 					</Modal>
 				</div>
 			);
@@ -48,7 +81,7 @@ export default function SimpleModal() {
 
 	return (
 		<div className='rainbow-m-bottom_xx-large rainbow-p-bottom_xx-large'>
-			<div className='rainbow-m-right_medium'>
+			<div>
 				<EmptyModal />
 			</div>
 		</div>

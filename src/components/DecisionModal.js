@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Button } from 'react-rainbow-components';
+import SimpleModal from './SimpleModal';
 
 const textStyles = {
 	textAlign: 'center',
@@ -7,22 +8,13 @@ const textStyles = {
 	padding: '0 16px',
 };
 
-export default function DecisionModal({ options }) {
-	//  {leftBtn,rightBtn,text} = options;
+export default function DecisionModal({ hideModal, setHideModal, post }) {
 	const btnStyles = {
 		textAlign: 'center',
 		color: 'white',
 		fontSize: 15,
 		padding: '16px 32px',
 		backgroundColor: '#eb714c',
-		border: 'none',
-	};
-	const yesBtn = {
-		textAlign: 'center',
-		fontSize: 15,
-		padding: '4px 26px',
-		backgroundColor: '#5ae717',
-		color: 'white',
 		border: 'none',
 	};
 	const noBtn = {
@@ -54,6 +46,7 @@ export default function DecisionModal({ options }) {
 
 		render() {
 			const { isOpen } = this.state;
+
 			return (
 				<div className='rainbow-m-bottom_xx-large rainbow-p-bottom_xx-large'>
 					<Button
@@ -69,13 +62,13 @@ export default function DecisionModal({ options }) {
 						title='Accept Job Offer'
 						footer={
 							<div className='decision-modal--footer'>
+								<SimpleModal post={post} setHideModal={setHideModal} />
 								<Button
-									onClick={() => this.handleOnClose}
-									style={yesBtn}
-									label='YES'
-									variant='neutral'
+									onClick={this.handleOnClose}
+									style={noBtn}
+									label='NO'
+									variant='brand'
 								/>
-								<Button style={noBtn} label='NO' variant='brand' />
 							</div>
 						}
 					>
@@ -85,6 +78,5 @@ export default function DecisionModal({ options }) {
 			);
 		}
 	}
-
-	return <ModalWFooterDirectional />;
+	if (!hideModal.modal) return <ModalWFooterDirectional />;
 }

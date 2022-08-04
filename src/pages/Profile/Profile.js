@@ -3,6 +3,7 @@ import client from '../../utils/client';
 import { useEffect, useState } from 'react';
 import EmployeeProfile from '../../components/Profiles/EmployeeProfile';
 import EmployerProfile from '../../components/Profiles/EmployerProfile';
+import JobPostCard from '../../components/JobPostCard';
 
 export default function Profile() {
 	const currUser = JSON.parse(localStorage.getItem('user'));
@@ -14,11 +15,27 @@ export default function Profile() {
 		lastName: false,
 	});
 
+	console.log('CURRENT USER IN PROFILE', currUser);
 	useEffect(() => {
-		if (currUser) {
+		console.log('INDIE USEFFECT');
+		if (currUser.type === 'employee') {
 			setIsLoading(true);
 			const getUser = async () => {
-				const res = await client.get(`/user/find/${currUser.userId}`);
+				const res = await client.get(
+					`/user/find/${currUser.userId}?include=true&profileId=${currUser.profileId}`
+				);
+				console.log('RES,', res.data);
+				setUser(res.data);
+				setIsLoading(false);
+			};
+			getUser();
+		} else if (currUser.type === 'employer') {
+			setIsLoading(true);
+			const getUser = async () => {
+				const res = await client.get(
+					`/user/find/${currUser.userId}?include=true`
+				);
+				console.log(res.data);
 				setUser(res.data);
 				setIsLoading(false);
 			};
@@ -50,11 +67,24 @@ export default function Profile() {
 			method: 'POST',
 			body: formData1,
 		});
-		const res = await client.get(`/user/find/${currUser.userId}`);
-		setUser(res.data);
-		setUploadProfileImage(null);
-		setIsLoading(false);
+		if (currUser === 'employer') {
+			const res = await client.get(
+				`/user/find/${currUser.userId}?include=true`
+			);
+			setUser(res.data);
+			setUploadProfileImage(null);
+			setIsLoading(false);
+		} else {
+			const res = await client.get(
+				`/user/find/${currUser.userId}?include=true&profileId=${currUser.profileId}`
+			);
+			setUser(res.data);
+			setUploadProfileImage(null);
+			setIsLoading(false);
+		}
 	};
+
+	console.log('USER', user, 'JOBS:', user?.jobPosts);
 
 	return (
 		<div className='profile-outer-container'>
@@ -88,6 +118,23 @@ export default function Profile() {
 						setUploadProfileImage={setUploadProfileImage}
 					/>
 				)}
+				<div className='current-jobs'>
+					<div className='current-jobs--header'>
+						{currUser?.type === 'employer'
+							? 'YOUR ADVERTISEMENTS'
+							: 'YOUR JOBS'}
+					</div>
+					{currUser?.type === 'employer' &&
+						user &&
+						user.employerProfile?.jobPost.map((post, i) => {
+							return <JobPostCard key={post.id} post={post} />;
+						})}
+					{currUser?.type === 'employee' &&
+						user?.jobPosts &&
+						user.jobPosts.map((post, i) => {
+							return <JobPostCard key={post.id} post={post} />;
+						})}
+				</div>
 			</div>
 		</div>
 	);

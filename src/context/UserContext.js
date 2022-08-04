@@ -25,7 +25,7 @@ export default function UserContextProvider({ children }) {
 		}
 	}, []);
 
-	console.log(state);
+	console.log('STATE:', state);
 
 	return (
 		<UserContext.Provider value={[state, dispatch]}>

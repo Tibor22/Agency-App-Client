@@ -198,4 +198,8 @@
   border-left: 0;
   border-right: 0;
   background-color: #8070d4;
+}
+
+.posts-container_posts--card.green {
+  border: 5px solid rgb(65, 227, 65);
 }/*# sourceMappingURL=posts.css.map */

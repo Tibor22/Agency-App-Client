@@ -107,7 +107,13 @@
 	&_left {
 		display: flex;
 		align-items: flex-end;
-		// background-color: red;
+		// & img {
+		// 	position: absolute;
+		// 	z-index: 9999999999;
+		// 	// transform: translate(-8%, 64%);
+		// 	top: 8rem;
+		// 	left: 7.5rem;
+		// }
 	}
 }
 .third-step {

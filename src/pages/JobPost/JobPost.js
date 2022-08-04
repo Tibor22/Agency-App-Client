@@ -5,19 +5,12 @@ import { useState } from 'react';
 import DecisionModal from '../../components/DecisionModal';
 import './jobPost.css';
 
-export default function JobPost({ post }) {
+export default function JobPost({ post, isOwned }) {
 	const textStyles = {
 		// textAlign: 'center',
 		fontSize: 15,
 		padding: '0 66px',
 	};
-	// const btnStyles = {
-	// 	textAlign: 'center',
-	// 	fontSize: 15,
-	// 	padding: '16px 32px',
-	// 	backgroundColor: '#eb714c',
-	// 	border: 'none',
-	// };
 	const spanStyle = {
 		textAlign: 'left',
 		display: 'block',
@@ -31,9 +24,9 @@ export default function JobPost({ post }) {
 		border: 'none',
 	};
 
-	const [decision, setDecision] = useState(false);
+	const [hideModal, setHideModal] = useState({ modal: false });
 
-	console.log(decision);
+	const user = JSON.parse(localStorage.getItem('user'));
 
 	class ModalWFooterDirectional extends React.Component {
 		constructor(props) {
@@ -50,14 +43,8 @@ export default function JobPost({ post }) {
 		}
 
 		handleOnClose() {
-			setDecision(false);
 			return this.setState({ isOpen: false });
 		}
-
-		// openDecision() {
-		// 	setDecision(true);
-		// 	console.log(decision);
-		// }
 
 		render() {
 			const { isOpen } = this.state;
@@ -77,14 +64,13 @@ export default function JobPost({ post }) {
 							size='large'
 							footer={
 								<div className='modal-footer'>
-									{/* <Button
-										onClick={() => setDecision(true)}
-										style={btnStyles}
-										label='Accept Job'
-										variant='brand'
-									/> */}
-
-									<DecisionModal />
+									{user.type === 'employee' && !isOwned && (
+										<DecisionModal
+											post={post}
+											hideModal={hideModal}
+											setHideModal={setHideModal}
+										/>
+									)}
 								</div>
 							}
 						>
@@ -119,7 +105,6 @@ export default function JobPost({ post }) {
 									</div>
 								</div>
 								<p style={textStyles}>
-									{/* {post.content} */}
 									{post.content.split('\n').map((line) => {
 										if (line.length === 0)
 											return (
@@ -147,5 +132,5 @@ export default function JobPost({ post }) {
 		}
 	}
 
-	return <ModalWFooterDirectional />;
+	if (!hideModal.modal) return <ModalWFooterDirectional />;
 }
