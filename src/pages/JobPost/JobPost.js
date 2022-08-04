@@ -23,10 +23,12 @@ export default function JobPost({ post, isOwned }) {
 		backgroundColor: '#eb714c',
 		border: 'none',
 	};
-
+	console.log('INSIDE');
 	const [hideModal, setHideModal] = useState({ modal: false });
 
 	const user = JSON.parse(localStorage.getItem('user'));
+
+	console.log('Isowned:', isOwned);
 
 	class ModalWFooterDirectional extends React.Component {
 		constructor(props) {
@@ -64,7 +66,7 @@ export default function JobPost({ post, isOwned }) {
 							size='large'
 							footer={
 								<div className='modal-footer'>
-									{user.type === 'employee' && !isOwned && (
+									{user?.type === 'employee' && !isOwned && (
 										<DecisionModal
 											post={post}
 											hideModal={hideModal}

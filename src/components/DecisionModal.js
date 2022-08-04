@@ -72,7 +72,7 @@ export default function DecisionModal({ hideModal, setHideModal, post }) {
 							</div>
 						}
 					>
-						<p style={textStyles}>Would you like to proceed ?{/* {text} */}</p>
+						<p style={textStyles}>Would you like to accept ?{/* {text} */}</p>
 					</Modal>
 				</div>
 			);

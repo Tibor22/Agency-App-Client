@@ -5,6 +5,8 @@ import UploadImage from '../../components/UploadImage/UploadImage';
 import client from '../../utils/client';
 import jobFormLG from '../../assets/jobFormLG.png';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
+import { useContext } from 'react';
 
 export default function JobForm() {
 	const [formData, setFormData] = useState({
@@ -20,7 +22,8 @@ export default function JobForm() {
 	});
 	let navigate = useNavigate();
 	const [loading, setLoading] = useState(null);
-
+	const currUser = JSON.parse(localStorage.getItem('user'));
+	const [user, dispatch] = useContext(UserContext);
 	const styles = {
 		display: 'inline-block',
 		padding: '1rem',
@@ -58,6 +61,21 @@ export default function JobForm() {
 			method: 'POST',
 			body: formData1,
 		});
+		let data;
+		if (currUser.type === 'employee') {
+			const res = await client.get(
+				`/user/find/${currUser.userId}?include=true&profileId=${currUser.profileId}`
+			);
+			console.log(res);
+			data = res.data.jobPosts;
+		} else if (currUser.type === 'employer') {
+			const res = await client.get(
+				`/user/find/${currUser.userId}?include=true`
+			);
+			data = res.data.employerProfile.jobPost;
+		}
+
+		dispatch({ type: 'ADDPOST', payload: data });
 		setLoading(false);
 		navigate('/posts', { replace: true });
 	};

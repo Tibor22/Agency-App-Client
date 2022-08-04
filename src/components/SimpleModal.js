@@ -1,11 +1,13 @@
 import React from 'react';
 import { Modal, Button } from 'react-rainbow-components';
 import party from '../assets/party.png';
-
+import { UserContext } from '../context/UserContext';
+import { useContext } from 'react';
 import client from '../utils/client';
 
 export default function SimpleModal({ setHideModal, post }) {
 	const currUser = JSON.parse(localStorage.getItem('user'));
+	const [user, dispatch] = useContext(UserContext);
 	const modalContainer = {
 		padding: '40px',
 		display: 'flex',
@@ -46,7 +48,26 @@ export default function SimpleModal({ setHideModal, post }) {
 				dataToSend
 			);
 
-			return this.setState({ isOpen: true });
+			let data;
+
+			if (currUser.type === 'employee') {
+				const res = await client.get(
+					`/user/find/${currUser.userId}?include=true&profileId=${currUser.profileId}`
+				);
+				console.log(res);
+				data = res.data.jobPosts;
+			} else if (currUser.type === 'employer') {
+				const res = await client.get(
+					`/user/find/${currUser.userId}?include=true`
+				);
+				data = res.data.employerProfile.jobPost;
+			}
+			this.setState({ isOpen: true });
+			setTimeout(() => {
+				dispatch({ type: 'ADDPOST', payload: data });
+			}, 3000);
+
+			return;
 		}
 
 		handleOnClose() {

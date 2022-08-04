@@ -59,7 +59,9 @@
   border-radius: 50%;
   align-self: center;
   justify-self: center;
-  max-width: 200px;
+  -o-object-position: top;
+     object-position: top;
+  width: 200px;
   height: 200px;
   -o-object-fit: cover;
      object-fit: cover;

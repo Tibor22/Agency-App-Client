@@ -38,6 +38,8 @@ export default function Posts() {
 		[loading, hasMore]
 	);
 
+	console.log(state);
+
 	function handleSearch(e) {
 		const { value, name } = e.target;
 		console.log(name, value);
@@ -111,7 +113,7 @@ export default function Posts() {
 						{posts &&
 							posts.map((post, i) => {
 								if (posts.length === i + 1) {
-									const answer = state?.user.jobPosts
+									const answer = state?.user?.jobPosts
 										? state.user.jobPosts.some(
 												(jobPost) => jobPost.id === post.id
 										  )
@@ -157,7 +159,7 @@ export default function Posts() {
 												<div className='company-salary'>
 													£{post.salary} / hour
 												</div>
-												<JobPost post={post} />
+												<JobPost isOwned={answer} post={post} />
 											</div>
 										</div>
 									);
