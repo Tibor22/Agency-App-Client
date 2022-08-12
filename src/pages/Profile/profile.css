@@ -175,4 +175,21 @@
   text-align: center;
   font-size: 2.6rem;
   margin-top: 2rem;
+}
+
+.current-jobs::-webkit-scrollbar {
+  width: 20px;
+}
+
+.current-jobs::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+.current-jobs::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  border: 6px solid rgba(0, 0, 0, 0.18);
+  border-left: 0;
+  border-right: 0;
+  background-color: var(--color-primary-hover);
 }/*# sourceMappingURL=profile.css.map */
