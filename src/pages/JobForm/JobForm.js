@@ -7,7 +7,7 @@ import jobFormLG from '../../assets/jobFormLG.png';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { useContext } from 'react';
-
+const host = 'https://boiling-harbor-01815.herokuapp.com';
 export default function JobForm() {
 	const [formData, setFormData] = useState({
 		companyName: '',
@@ -57,7 +57,7 @@ export default function JobForm() {
 		const postRes = await client.post('/posts/create', jobToSend);
 
 		console.log('FORMDATA1:', myRenamedFile);
-		const response = await fetch('http://localhost:4000/v1/posts/image', {
+		const response = await fetch(`${host}/v1/posts/image`, {
 			method: 'POST',
 			body: formData1,
 		});
