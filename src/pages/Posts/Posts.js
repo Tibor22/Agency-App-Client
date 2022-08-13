@@ -22,6 +22,7 @@ export default function Posts() {
 	const [query, setQuery] = useState(postsQuery);
 	const [pageNumber, setPageNumber] = useState(0);
 	const { posts, hasMore, loading, error } = usePostsSearch(query, pageNumber);
+	const host = process.env.REACT_APP_API_URL;
 	setPostsQuery(null);
 	const observer = useRef();
 	const lastPostElementRef = useCallback(
@@ -130,10 +131,7 @@ export default function Posts() {
 										>
 											<div className='company-main'>
 												<div className='company-logo'>
-													<img
-														src={`https://boiling-harbor-01815.herokuapp.com${post.imageUrl}`}
-														alt=''
-													/>
+													<img src={`${host}${post.imageUrl}`} alt='' />
 												</div>
 												<div className='name-address-flex'>
 													<div className='company-name'>{post.companyName}</div>

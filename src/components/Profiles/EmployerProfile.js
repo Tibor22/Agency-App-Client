@@ -14,6 +14,7 @@ export default function EmployerProfile({
 	setUploadProfileImage,
 	uploadProfileImage,
 }) {
+	const host = process.env.REACT_APP_API_URL;
 	const handleChange = async (e) => {
 		if (typeof e.getMonth === 'function') {
 			const value = e.toISOString();
@@ -60,7 +61,7 @@ export default function EmployerProfile({
 				<div className='profile-img-container'>
 					<img
 						src={
-							`https://boiling-harbor-01815.herokuapp.com/${user.employerProfile.profileImgUrl}` || {
+							`${host}${user.employerProfile.profileImgUrl}` || {
 								profileIMG,
 							}
 						}

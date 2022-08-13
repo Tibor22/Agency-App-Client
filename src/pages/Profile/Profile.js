@@ -142,11 +142,3 @@ export default function Profile() {
 		</div>
 	);
 }
-
-// firstName        String
-// lastName         String
-// DoB              DateTime?
-// companyAddress   String
-// profileImgUrl    String?
-// phoneNum         Int?
-// bio              String?
