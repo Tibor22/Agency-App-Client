@@ -14,7 +14,7 @@ export default function EmployerProfile({
 	setUploadProfileImage,
 	uploadProfileImage,
 }) {
-	const host = 'https://boiling-harbor-01815.herokuapp.com';
+	const host = 'http://localhost:4000';
 	const handleChange = async (e) => {
 		if (typeof e.getMonth === 'function') {
 			const value = e.toISOString();

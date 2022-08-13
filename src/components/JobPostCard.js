@@ -11,14 +11,12 @@ export default function JobPostCard({ post, userType }) {
 	const answer = state?.user?.jobPosts
 		? state.user.jobPosts.some((jobPost) => jobPost.id === post.id)
 		: false;
+	const host = 'http://localhost:4000';
 	return (
 		<div className={`posts-container_posts--card ${answer ? 'green' : ''}`}>
 			<div className='company-main'>
 				<div className='company-logo'>
-					<img
-						src={`https://boiling-harbor-01815.herokuapp.com${post.imageUrl}`}
-						alt=''
-					/>
+					<img src={`${host}${post.imageUrl}`} alt='' />
 				</div>
 				<div className='name-address-flex'>
 					<div className='company-name'>{post.companyName}</div>

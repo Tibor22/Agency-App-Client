@@ -22,7 +22,8 @@ export default function Posts() {
 	const [query, setQuery] = useState(postsQuery);
 	const [pageNumber, setPageNumber] = useState(0);
 	const { posts, hasMore, loading, error } = usePostsSearch(query, pageNumber);
-	const host = 'https://boiling-harbor-01815.herokuapp.com';
+	const host = 'http://localhost:4000';
+
 	setPostsQuery(null);
 	const observer = useRef();
 	const lastPostElementRef = useCallback(

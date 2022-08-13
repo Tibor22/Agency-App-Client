@@ -7,7 +7,7 @@ import jobFormLG from '../../assets/jobFormLG.png';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { useContext } from 'react';
-const host = 'https://boiling-harbor-01815.herokuapp.com';
+const host = 'http://localhost:4000';
 export default function JobForm() {
 	const [formData, setFormData] = useState({
 		companyName: '',
