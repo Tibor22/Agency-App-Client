@@ -78,7 +78,10 @@ export default function JobPost({ post, isOwned }) {
 						>
 							<div className='modalContainer'>
 								<div className='modal-img-container'>
-									<img src={`http://localhost:4000${post.imageUrl}`} alt='' />
+									<img
+										src={`https://boiling-harbor-01815.herokuapp.com${post.imageUrl}`}
+										alt=''
+									/>
 								</div>
 
 								<h2 className='modal-header'>{post.jobType}</h2>

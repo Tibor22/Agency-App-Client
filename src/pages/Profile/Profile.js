@@ -63,10 +63,13 @@ export default function Profile() {
 			`/user/profile/update/${currUser.userId}`,
 			imgToSend
 		);
-		const changedImage = await fetch('http://localhost:4000/v1/user/image', {
-			method: 'POST',
-			body: formData1,
-		});
+		const changedImage = await fetch(
+			'https://boiling-harbor-01815.herokuapp.com/v1/user/image',
+			{
+				method: 'POST',
+				body: formData1,
+			}
+		);
 		if (currUser === 'employer') {
 			const res = await client.get(
 				`/user/find/${currUser.userId}?include=true`

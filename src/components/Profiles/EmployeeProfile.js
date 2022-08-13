@@ -57,7 +57,7 @@ export default function EmployeeProfile({
 					<img
 						className='profileImg'
 						src={
-							`http://localhost:4000/images/${user.employeeProfile.profileImgUrl}` || {
+							`https://boiling-harbor-01815.herokuapp.com/${user.employeeProfile.profileImgUrl}` || {
 								profileIMG,
 							}
 						}

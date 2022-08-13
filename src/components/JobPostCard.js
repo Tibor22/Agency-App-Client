@@ -15,7 +15,10 @@ export default function JobPostCard({ post, userType }) {
 		<div className={`posts-container_posts--card ${answer ? 'green' : ''}`}>
 			<div className='company-main'>
 				<div className='company-logo'>
-					<img src={`http://localhost:4000${post.imageUrl}`} alt='' />
+					<img
+						src={`https://boiling-harbor-01815.herokuapp.com${post.imageUrl}`}
+						alt=''
+					/>
 				</div>
 				<div className='name-address-flex'>
 					<div className='company-name'>{post.companyName}</div>

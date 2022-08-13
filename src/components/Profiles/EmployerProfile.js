@@ -60,7 +60,7 @@ export default function EmployerProfile({
 				<div className='profile-img-container'>
 					<img
 						src={
-							`http://localhost:4000/images/${user.employerProfile.profileImgUrl}` || {
+							`https://boiling-harbor-01815.herokuapp.com/${user.employerProfile.profileImgUrl}` || {
 								profileIMG,
 							}
 						}

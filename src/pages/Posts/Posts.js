@@ -131,7 +131,7 @@ export default function Posts() {
 											<div className='company-main'>
 												<div className='company-logo'>
 													<img
-														src={`http://localhost:4000${post.imageUrl}`}
+														src={`https://boiling-harbor-01815.herokuapp.com${post.imageUrl}`}
 														alt=''
 													/>
 												</div>
