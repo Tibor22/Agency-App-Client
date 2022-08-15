@@ -64,14 +64,12 @@ export default function JobForm() {
 		let data;
 		if (currUser.type === 'employee') {
 			const res = await client.get(
-				`/user/find/${currUser.userId}?include=true&profileId=${currUser.profileId}`
+				`/user/findProfile/${currUser.userId}?profileId=${currUser.profileId}`
 			);
 			console.log(res);
 			data = res.data.jobPosts;
 		} else if (currUser.type === 'employer') {
-			const res = await client.get(
-				`/user/find/${currUser.userId}?include=true`
-			);
+			const res = await client.get(`/user/findProfile/${currUser.userId}`);
 			data = res.data.employerProfile.jobPost;
 		}
 

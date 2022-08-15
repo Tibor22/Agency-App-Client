@@ -37,13 +37,13 @@ export default function SignInForm({ setFormType, formType }) {
 
 				if (data.data.data.type === 'employee') {
 					const res = await client.get(
-						`/user/find/${data.data.data.userId}?include=true&profileId=${data.data.data.profileId}`
+						`/user/findProfile/${data.data.data.userId}?profileId=${data.data.data.profileId}`
 					);
 					console.log(res);
 					data.data.data.jobPosts = res.data.jobPosts;
 				} else if (data.data.data.type === 'employer') {
 					const res = await client.get(
-						`/user/find/${data.data.data.userId}?include=true`
+						`/user/findProfile/${data.data.data.userId}`
 					);
 					data.data.data.jobPosts = res.data.employerProfile.jobPost;
 				}

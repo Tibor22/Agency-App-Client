@@ -1,7 +1,7 @@
 import axios from 'axios';
 const host = process.env.REACT_APP_API_URL;
 const tokenKey = process.env.REACT_APP_USER_TOKEN;
-
+console.log(host);
 const client = {
 	get: (path, withToken = true, params) => {
 		const url = `${host}${path}`;

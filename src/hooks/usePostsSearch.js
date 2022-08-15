@@ -29,6 +29,7 @@ export default function usePostsSearch(query, pageNumber) {
 			cancelToken: new axios.CancelToken((c) => (cancel = c)),
 		})
 			.then((res) => {
+				console.log(res);
 				setPosts((prevPosts) => {
 					return [...new Set([...prevPosts, ...res.data])];
 				});

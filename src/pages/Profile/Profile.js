@@ -22,7 +22,7 @@ export default function Profile() {
 			setIsLoading(true);
 			const getUser = async () => {
 				const res = await client.get(
-					`/user/find/${currUser.userId}?include=true&profileId=${currUser.profileId}`
+					`/user/findProfile/${currUser.userId}?profileId=${currUser.profileId}`
 				);
 				console.log('RES,', res.data);
 				setUser(res.data);
@@ -32,9 +32,7 @@ export default function Profile() {
 		} else if (currUser.type === 'employer') {
 			setIsLoading(true);
 			const getUser = async () => {
-				const res = await client.get(
-					`/user/find/${currUser.userId}?include=true`
-				);
+				const res = await client.get(`/user/findProfile/${currUser.userId}`);
 				console.log(res.data);
 				setUser(res.data);
 				setIsLoading(false);
@@ -45,7 +43,6 @@ export default function Profile() {
 
 	const uploadImage = async () => {
 		setIsLoading(true);
-		console.log(uploadProfileImage);
 		const myRenamedFile = new File(
 			[uploadProfileImage.file],
 			`${uploadProfileImage.file.name}${String(
@@ -58,33 +55,25 @@ export default function Profile() {
 			profileImgUrl: myRenamedFile.name,
 		};
 
-		console.log(uploadProfileImage.file.name.slice(-3));
-		const postRes = await client.patch(
-			`/user/profile/update/${currUser.userId}`,
-			imgToSend
-		);
-		const changedImage = await fetch(`${host}/v1/user/image`, {
+		await client.patch(`/user/profile/update/${currUser.userId}`, imgToSend);
+		await fetch(`${host}/v1/user/image`, {
 			method: 'POST',
 			body: formData1,
 		});
 		if (currUser === 'employer') {
-			const res = await client.get(
-				`/user/find/${currUser.userId}?include=true`
-			);
+			const res = await client.get(`/user/findProfile/${currUser.userId}`);
 			setUser(res.data);
 			setUploadProfileImage(null);
 			setIsLoading(false);
 		} else {
 			const res = await client.get(
-				`/user/find/${currUser.userId}?include=true&profileId=${currUser.profileId}`
+				`/user/findProfile/${currUser.userId}?profileId=${currUser.profileId}`
 			);
 			setUser(res.data);
 			setUploadProfileImage(null);
 			setIsLoading(false);
 		}
 	};
-
-	console.log('USER', user, 'JOBS:', user?.jobPosts);
 
 	return (
 		<div className='profile-outer-container'>
