@@ -45,6 +45,9 @@ $font-family-title: 'Source Sans Pro', sans-serif;
 html {
 	font-size: 62.5%;
 	font-family: var(--font-family-primary);
+	@media screen and (max-width: 1050px) {
+		font-size: 50%;
+	}
 }
 
 .center {

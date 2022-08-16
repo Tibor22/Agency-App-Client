@@ -2,9 +2,8 @@ import './navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignIn } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
-import client from '../../utils/client';
 
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
@@ -14,6 +13,7 @@ export default function Navbar() {
 	const name = JSON.parse(localStorage.getItem('user'));
 	const navigate = useNavigate();
 	const [user, dispatch] = useContext(UserContext);
+	const [openNavbar, setOpenNavbar] = useState(false);
 	const signOut = () => {
 		if (name) {
 			localStorage.removeItem(process.env.REACT_APP_USER_TOKEN);
@@ -25,6 +25,12 @@ export default function Navbar() {
 
 	return (
 		<div className='navbar-container'>
+			<div
+				onClick={() => setOpenNavbar(!openNavbar)}
+				className={openNavbar ? `hamburger-menu open` : `hamburger-menu`}
+			>
+				<div className='line'></div>
+			</div>
 			<div className='navbar'>
 				<div className='logo'>
 					<img src={logo} alt='' />

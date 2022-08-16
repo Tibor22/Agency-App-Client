@@ -16,9 +16,7 @@ export default function Profile() {
 		lastName: false,
 	});
 	const host = process.env.REACT_APP_IMG_URL;
-	console.log('CURRENT USER IN PROFILE', currUser);
 	useEffect(() => {
-		console.log('INDIE USEFFECT');
 		const getUser = async () => {
 			const res = await fetchProfile(currUser);
 			setUser(res.data);
