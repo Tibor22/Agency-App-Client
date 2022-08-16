@@ -22,7 +22,7 @@ export default function Posts() {
 	const [query, setQuery] = useState(postsQuery);
 	const [pageNumber, setPageNumber] = useState(0);
 	const { posts, hasMore, loading, error } = usePostsSearch(query, pageNumber);
-	const host = 'http://localhost:4000';
+	const host = process.env.REACT_APP_IMG_URL;
 
 	setPostsQuery(null);
 	const observer = useRef();

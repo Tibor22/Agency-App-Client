@@ -7,7 +7,7 @@ import jobFormLG from '../../assets/jobFormLG.png';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { useContext } from 'react';
-const host = 'http://localhost:4000';
+import fetchProfile from '../../utils/fetchProfile';
 export default function JobForm() {
 	const [formData, setFormData] = useState({
 		companyName: '',
@@ -52,26 +52,18 @@ export default function JobForm() {
 			endDate: formData.endDate.toISOString(),
 			imgUrl: myRenamedFile.name,
 		};
-		console.log('FINAL:', jobToSend);
 
-		const postRes = await client.post('/posts/create', jobToSend);
-
-		console.log('FORMDATA1:', myRenamedFile);
-		const response = await fetch(`${host}/v1/posts/image`, {
+		await client.post('/posts/create', jobToSend);
+		await fetch(`${process.env.REACT_APP_API_URL}/posts/image`, {
 			method: 'POST',
 			body: formData1,
 		});
 		let data;
-		if (currUser.type === 'employee') {
-			const res = await client.get(
-				`/user/findProfile/${currUser.userId}?profileId=${currUser.profileId}`
-			);
-			console.log(res);
-			data = res.data.jobPosts;
-		} else if (currUser.type === 'employer') {
-			const res = await client.get(`/user/findProfile/${currUser.userId}`);
-			data = res.data.employerProfile.jobPost;
-		}
+
+		const res = await fetchProfile(currUser);
+		currUser.type === 'employee'
+			? (data = res.data.jobPosts)
+			: (data = res.data.employerProfile.jobPost);
 
 		dispatch({ type: 'ADDPOST', payload: data });
 		setLoading(false);

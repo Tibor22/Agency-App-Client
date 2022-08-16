@@ -4,6 +4,7 @@ import party from '../assets/party.png';
 import { UserContext } from '../context/UserContext';
 import { useContext } from 'react';
 import client from '../utils/client';
+import fetchProfile from '../utils/fetchProfile';
 
 export default function SimpleModal({ setHideModal, post }) {
 	const currUser = JSON.parse(localStorage.getItem('user'));
@@ -49,16 +50,11 @@ export default function SimpleModal({ setHideModal, post }) {
 			);
 
 			let data;
+			const res = await fetchProfile(currUser);
+			currUser.type === 'employee'
+				? (data = res.data.jobPosts)
+				: (data = res.data.employerProfile.jobPost);
 
-			if (currUser.type === 'employee') {
-				const res = await client.get(
-					`/user/findProfile/${currUser.userId}?profileId=${currUser.profileId}`
-				);
-				data = res.data.jobPosts;
-			} else if (currUser.type === 'employer') {
-				const res = await client.get(`/user/findProfile/${currUser.userId}`);
-				data = res.data.employerProfile.jobPost;
-			}
 			this.setState({ isOpen: true });
 			setTimeout(() => {
 				dispatch({ type: 'ADDPOST', payload: data });

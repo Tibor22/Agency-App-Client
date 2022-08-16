@@ -7,7 +7,7 @@ import SignUpThirdForm from './SignUpThirdForm';
 import { useContext } from 'react';
 import { FormContext } from '../../context/FormContext';
 
-export default function Form({ userType, setUseType }) {
+export default function Form({ userType }) {
 	const [formType, setFormType] = useState('signIn');
 	const [currStep, setCurrentStep] = useState(1);
 	const [formData, setFormData] = useContext(FormContext);

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import EmployeeProfile from '../../components/Profiles/EmployeeProfile';
 import EmployerProfile from '../../components/Profiles/EmployerProfile';
 import JobPostCard from '../../components/JobPostCard';
+import fetchProfile from '../../utils/fetchProfile';
 
 export default function Profile() {
 	const currUser = JSON.parse(localStorage.getItem('user'));
@@ -14,31 +15,16 @@ export default function Profile() {
 		firstName: false,
 		lastName: false,
 	});
-	const host = 'http://localhost:4000';
+	const host = process.env.REACT_APP_IMG_URL;
 	console.log('CURRENT USER IN PROFILE', currUser);
 	useEffect(() => {
 		console.log('INDIE USEFFECT');
-		if (currUser.type === 'employee') {
-			setIsLoading(true);
-			const getUser = async () => {
-				const res = await client.get(
-					`/user/findProfile/${currUser.userId}?profileId=${currUser.profileId}`
-				);
-				console.log('RES,', res.data);
-				setUser(res.data);
-				setIsLoading(false);
-			};
-			getUser();
-		} else if (currUser.type === 'employer') {
-			setIsLoading(true);
-			const getUser = async () => {
-				const res = await client.get(`/user/findProfile/${currUser.userId}`);
-				console.log(res.data);
-				setUser(res.data);
-				setIsLoading(false);
-			};
-			getUser();
-		}
+		const getUser = async () => {
+			const res = await fetchProfile(currUser);
+			setUser(res.data);
+			setIsLoading(false);
+		};
+		getUser();
 	}, []);
 
 	const uploadImage = async () => {
@@ -60,19 +46,11 @@ export default function Profile() {
 			method: 'POST',
 			body: formData1,
 		});
-		if (currUser === 'employer') {
-			const res = await client.get(`/user/findProfile/${currUser.userId}`);
-			setUser(res.data);
-			setUploadProfileImage(null);
-			setIsLoading(false);
-		} else {
-			const res = await client.get(
-				`/user/findProfile/${currUser.userId}?profileId=${currUser.profileId}`
-			);
-			setUser(res.data);
-			setUploadProfileImage(null);
-			setIsLoading(false);
-		}
+
+		const res = await fetchProfile(currUser);
+		setUser(res.data);
+		setUploadProfileImage(null);
+		setIsLoading(false);
 	};
 
 	return (

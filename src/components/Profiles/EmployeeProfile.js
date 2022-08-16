@@ -14,7 +14,7 @@ export default function EmployeeProfile({
 	setUploadProfileImage,
 	uploadProfileImage,
 }) {
-	const host = 'http://localhost:4000';
+	const host = process.env.REACT_APP_IMG_URL;
 	const handleChange = async (e) => {
 		if (typeof e.getMonth === 'function') {
 			const value = e.toISOString();
@@ -25,7 +25,6 @@ export default function EmployeeProfile({
 			});
 		} else {
 			const { value, name } = e.target;
-			console.log(value, name);
 			setUser({
 				...user,
 				employeeProfile: { ...user.employeeProfile, [name]: value },
@@ -36,18 +35,10 @@ export default function EmployeeProfile({
 	const handleClick = async (e) => {
 		const name = e.target.getAttribute('name');
 		setCheckUser({ ...checkUser, [name]: !checkUser[name] });
-
-		console.log(e.target.innerText === 'Save');
-
 		const dataToSend = { [name]: user.employeeProfile[name] };
 
-		console.log(dataToSend);
-
 		if (e.target.innerText === 'Save') {
-			const res = await client.patch(
-				`/user/profile/update/${currUser.userId}`,
-				dataToSend
-			);
+			await client.patch(`/user/profile/update/${currUser.userId}`, dataToSend);
 		}
 	};
 

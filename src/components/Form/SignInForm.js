@@ -4,7 +4,7 @@ import { faSignIn } from '@fortawesome/free-solid-svg-icons';
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
-
+import fetchProfile from '../../utils/fetchProfile';
 import client from '../../utils/client.js';
 
 export default function SignInForm({ setFormType, formType }) {
@@ -34,19 +34,10 @@ export default function SignInForm({ setFormType, formType }) {
 				);
 				localStorage.setItem('user', JSON.stringify(data.data.data));
 				delete data.data.data.accessToken;
-
-				if (data.data.data.type === 'employee') {
-					const res = await client.get(
-						`/user/findProfile/${data.data.data.userId}?profileId=${data.data.data.profileId}`
-					);
-					console.log(res);
-					data.data.data.jobPosts = res.data.jobPosts;
-				} else if (data.data.data.type === 'employer') {
-					const res = await client.get(
-						`/user/findProfile/${data.data.data.userId}`
-					);
-					data.data.data.jobPosts = res.data.employerProfile.jobPost;
-				}
+				const res = await fetchProfile(data.data.data);
+				data.data.data.type === 'employee'
+					? (data.data.data.jobPosts = res.data.jobPosts)
+					: (data.data.data.jobPosts = res.data.employerProfile.jobPost);
 
 				dispatch({ type: 'LOGIN', payload: data.data.data });
 				navigate('/posts', { replace: true });

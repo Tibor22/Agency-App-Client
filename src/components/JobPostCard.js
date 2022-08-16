@@ -11,7 +11,7 @@ export default function JobPostCard({ post, userType }) {
 	const answer = state?.user?.jobPosts
 		? state.user.jobPosts.some((jobPost) => jobPost.id === post.id)
 		: false;
-	const host = 'http://localhost:4000';
+	const host = process.env.REACT_APP_IMG_URL;
 	return (
 		<div className={`posts-container_posts--card ${answer ? 'green' : ''}`}>
 			<div className='company-main'>

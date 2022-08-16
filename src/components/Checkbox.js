@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
 import { CheckboxGroup } from 'react-rainbow-components';
 
-export default function Checkbox({ setErrorMsg, values, setValues }) {
+export default function Checkbox({ values, setValues }) {
 	const options = [
 		{ value: 'Privacy Policy', label: 'Privacy Policy', disabled: false },
 		{ value: 'Terms&Conditions', label: 'Terms & Conditions', disabled: false },

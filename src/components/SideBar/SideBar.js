@@ -14,7 +14,6 @@ import { UserContext } from '../../context/UserContext.js';
 export default function SideBar() {
 	const [toggleSideBar, setToggleSideBar] = useState('hide');
 	const [user, dispatch] = useContext(UserContext);
-	console.log('USER:', user.user.type);
 
 	const toggle = (e) => {
 		if (toggleSideBar === 'hide') {

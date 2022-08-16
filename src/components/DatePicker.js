@@ -2,7 +2,6 @@ import React from 'react';
 import { DatePicker } from 'react-rainbow-components';
 
 export default function DatePickerFunc({
-	setErrorMsg,
 	setFormData,
 	setQuery,
 	formData,

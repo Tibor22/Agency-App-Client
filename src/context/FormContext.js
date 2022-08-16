@@ -13,8 +13,6 @@ export default function FormContextProvider({ children }) {
 		privacyPolicy: '',
 	});
 
-	console.log('FORM DATA:', formData);
-
 	return (
 		<FormContext.Provider value={[formData, setFormData]}>
 			{children}

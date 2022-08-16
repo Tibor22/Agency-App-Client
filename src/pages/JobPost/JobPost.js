@@ -6,7 +6,7 @@ import DecisionModal from '../../components/DecisionModal';
 import './jobPost.css';
 
 export default function JobPost({ post, isOwned }) {
-	const host = 'http://localhost:4000';
+	const host = process.env.REACT_APP_IMG_URL;
 	const textStyles = {
 		// textAlign: 'center',
 		fontSize: 15,
@@ -24,12 +24,10 @@ export default function JobPost({ post, isOwned }) {
 		backgroundColor: '#eb714c',
 		border: 'none',
 	};
-	console.log('INSIDE');
+
 	const [hideModal, setHideModal] = useState({ modal: false });
 
 	const user = JSON.parse(localStorage.getItem('user'));
-
-	console.log('Isowned:', isOwned);
 
 	class ModalWFooterDirectional extends React.Component {
 		constructor(props) {

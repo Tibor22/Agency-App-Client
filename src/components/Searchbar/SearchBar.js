@@ -1,11 +1,6 @@
 import './searchBar.css';
 
-export default function SearchBar({
-	handleSubmit,
-	setQuery,
-	query,
-	handleSearch,
-}) {
+export default function SearchBar({ handleSubmit, query, handleSearch }) {
 	return (
 		<form onSubmit={handleSubmit} className='searchbar-form'>
 			<label className='searchbar-form--controller-type'>

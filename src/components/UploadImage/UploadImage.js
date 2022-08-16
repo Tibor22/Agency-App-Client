@@ -8,10 +8,6 @@ export default function UploadImage({ setFormData, formData, styles, title }) {
 		setFormData({ ...formData, file: img.data });
 	};
 
-	// const id = {
-	// 	backgroundColor: 'red',
-	// };
-
 	return (
 		<>
 			<label style={styles} htmlFor='myfile'>
