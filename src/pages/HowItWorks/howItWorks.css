@@ -13,6 +13,21 @@
   display: grid;
   grid-template-columns: 1fr 20rem 1fr;
 }
+@media screen and (max-width: 1180px) {
+  .three-column-grid {
+    padding: 3rem;
+  }
+}
+@media screen and (max-width: 780px) {
+  .three-column-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 670px) {
+  .three-column-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 .first-step,
 .second-step,
@@ -20,6 +35,13 @@
   height: 50vh;
   width: 100%;
   position: relative;
+}
+@media screen and (max-width: 1200px), screen and (min-height: 1000px) {
+  .first-step,
+.second-step,
+.third-step {
+    height: auto;
+  }
 }
 .first-step_left,
 .second-step_left,
@@ -32,12 +54,28 @@
   max-width: 100%;
   max-height: 100%;
 }
+@media screen and (max-width: 1200px), screen and (min-height: 1000px) {
+  .first-step_left img,
+.second-step_left img,
+.third-step_left img {
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+}
 .first-step_middle,
 .second-step_middle,
 .third-step_middle {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+@media screen and (max-width: 780px) {
+  .first-step_middle,
+.second-step_middle,
+.third-step_middle {
+    position: absolute;
+    left: 2rem;
+  }
 }
 .first-step_middle--header,
 .second-step_middle--header,
@@ -60,6 +98,7 @@
   color: var(--color-btn-primary);
   font-weight: 900;
 }
+
 .first-step_right {
   position: relative;
   display: flex;
@@ -74,6 +113,11 @@
   left: 20%;
   top: 15%;
 }
+@media screen and (max-width: 780px) {
+  .first-step_right::after {
+    display: none;
+  }
+}
 .first-step_right::before {
   content: "";
   width: 20rem;
@@ -83,8 +127,26 @@
   left: 25%;
   top: 20%;
 }
+@media screen and (max-width: 780px) {
+  .first-step_right::before {
+    display: none;
+  }
+}
+
 .second-step {
   width: 100%;
+  margin-top: 7rem;
+}
+@media screen and (max-width: 1200px) {
+  .second-step {
+    margin-top: 2rem;
+  }
+}
+@media screen and (max-width: 670px) {
+  .second-step {
+    display: flex;
+    flex-direction: column;
+  }
 }
 .second-step_middle--header {
   background-color: var(--color-primary-hover);
@@ -100,14 +162,35 @@
   width: 80%;
   height: 80%;
 }
+@media screen and (max-width: 670px) {
+  .second-step_right img {
+    margin-top: 10rem;
+  }
+}
 .second-step_left {
   display: flex;
   align-items: flex-end;
 }
+@media screen and (max-width: 670px) {
+  .second-step_left {
+    order: 1;
+    margin-top: 5rem;
+  }
+}
 
 .third-step {
+  margin-top: 7rem;
   width: 100%;
   height: 100%;
+}
+@media screen and (max-width: 1200px) {
+  .third-step {
+    margin-top: 2rem;
+  }
+}
+.third-step_left {
+  display: flex;
+  justify-content: center;
 }
 .third-step_left img {
   height: 95%;
@@ -120,8 +203,13 @@
 }
 .third-step_right img {
   position: absolute;
-  z-index: 9999999999;
+  z-index: 99;
   transform: translate(-8%, -64%);
+}
+@media screen and (max-width: 1050px) {
+  .third-step_right img {
+    transform: translate(-8%, -44%);
+  }
 }
 .third-step_right .shout {
   transform: translate(-10%, -70%);
@@ -135,6 +223,11 @@
   margin-bottom: 2rem;
   box-shadow: 3px 3px 8px 0px #000000;
 }
+@media screen and (max-width: 780px) {
+  .small-circle {
+    display: none;
+  }
+}
 
 .accepted {
   display: flex;
@@ -142,36 +235,26 @@
 }
 
 .cloud {
-  margin-top: 70px;
+  margin-top: 7rem;
   width: auto;
   height: auto;
   background: white;
   box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
   border-radius: 100px;
-  padding: 2.5rem;
+  padding: 3rem;
   font-size: 1.4rem;
   position: relative;
   z-index: 10;
 }
+@media screen and (max-width: 670px) {
+  .cloud {
+    margin-top: 0rem;
+    border-radius: 8px;
+  }
+}
 .cloud h2 {
   margin-bottom: 0.9rem;
-}
-
-.cloud::after,
-.cloud::before {
-  content: "";
-  position: absolute;
-  display: inline-block;
-  background: inherit;
-  border-radius: inherit;
-  z-index: 1;
-}
-
-.cloud::after {
-  width: 100px;
-  height: 100px;
-  top: -180px;
-  left: 50px;
+  text-align: center;
 }
 
 .speech-bubble {
@@ -206,4 +289,25 @@
   border-bottom: 0;
   margin-top: -25px;
   margin-right: -50px;
+}
+
+.upload-header {
+  display: none;
+}
+@media screen and (max-width: 670px) {
+  .upload-header {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .shout {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .accepted img {
+    width: 90%;
+  }
 }/*# sourceMappingURL=howItWorks.css.map */

@@ -46,6 +46,7 @@ export default function HowItWorksEmployer() {
 					<div className='first-step_right'>
 						<div className='first-step_right--text'>
 							<div className='cloud'>
+								<h2>Sign Up</h2>
 								Lorem ipsum dolor, sit amet consectetur adipisicing elit.
 								Nostrum unde labore doloribus quo magnam sit ex consequuntur
 								porro quidem corporis, facere possimus atque, distinctio,
@@ -60,6 +61,7 @@ export default function HowItWorksEmployer() {
 					<div className='second-step_left'>
 						<div className='speech-bubble'>Upload Documents</div>
 						<div className='cloud'>
+							<h2 className='upload-header'>Upload Documents</h2>
 							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum
 							unde labore doloribus quo magnam sit ex consequuntur porro quidem
 							corporis, facere possimus atque, distinctio, cupiditate error

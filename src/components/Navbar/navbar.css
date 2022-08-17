@@ -225,7 +225,7 @@
 @media only screen and (max-width: 780px) {
   .navbar_list.open {
     position: fixed;
-    transform: translateX(-80%);
+    transform: translateX(-75%);
     background-color: var(--color-primary-dark);
   }
 }
