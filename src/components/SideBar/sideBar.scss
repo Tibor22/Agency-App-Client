@@ -10,6 +10,9 @@
 	flex-direction: column;
 	align-items: center;
 	transition: all 0.5s;
+	@media screen and (max-width: 780px) {
+		top: 8rem;
+	}
 }
 
 .sideBar-list_item {
@@ -44,6 +47,9 @@
 		background-color: var(--color-primary-hover);
 		cursor: pointer;
 	}
+	@media screen and (max-width: 400px) {
+		right: -4rem;
+	}
 }
 
 .sideBar-container.hide {
@@ -60,4 +66,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	@media screen and (max-width: 780px) {
+		top: 8rem;
+	}
 }

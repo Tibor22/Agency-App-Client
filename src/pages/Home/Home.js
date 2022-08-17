@@ -54,6 +54,7 @@ export default function Home() {
 							/>
 						</div>
 					</div>
+
 					<div className='home_showcase-image'>
 						<img src={`${home}`} alt='' />
 					</div>

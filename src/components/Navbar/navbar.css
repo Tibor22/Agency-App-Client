@@ -20,6 +20,11 @@
   top: 0;
   z-index: 9999999;
 }
+@media screen and (max-width: 780px) {
+  .navbar {
+    height: 8rem;
+  }
+}
 .navbar_list {
   margin-left: auto;
   display: flex;
@@ -35,6 +40,49 @@
     gap: 1rem;
   }
 }
+@media screen and (max-width: 780px) {
+  .navbar_list {
+    position: relative;
+    flex-direction: column;
+    position: fixed;
+    right: -70%;
+    top: -8px;
+    transition: all 0.3s;
+    height: calc(100% + 8px);
+    width: 80%;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 600px) {
+  .navbar_list {
+    right: -68%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .navbar_list {
+    right: -68%;
+  }
+}
+@media screen and (max-width: 530px) {
+  .navbar_list {
+    right: -66.5%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .navbar_list {
+    right: -65%;
+  }
+}
+@media screen and (max-width: 430px) {
+  .navbar_list {
+    right: -63%;
+  }
+}
+@media screen and (max-width: 380px) {
+  .navbar_list {
+    right: -61%;
+  }
+}
 .navbar_list--item {
   list-style-type: none;
   margin-left: 2rem;
@@ -42,6 +90,12 @@
   padding: 0.65rem 1.3rem;
   border-radius: 3rem 0rem 3rem 0rem;
   position: relative;
+}
+@media screen and (max-width: 780px) {
+  .navbar_list--item {
+    margin-top: 5vh;
+    margin-left: 0rem;
+  }
 }
 .navbar_list--item:last-child {
   margin-left: 10rem;
@@ -54,6 +108,12 @@
 @media screen and (max-width: 1050px) {
   .navbar_list--item:last-child {
     margin-left: 2.5rem;
+  }
+}
+@media screen and (max-width: 780px) {
+  .navbar_list--item:last-child {
+    margin-top: 5vh;
+    margin-left: 0rem;
   }
 }
 .navbar_list--item:hover {
@@ -127,8 +187,8 @@
   height: 6rem;
   z-index: 999999999;
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 2rem;
+  left: 1rem;
   cursor: pointer;
   display: none;
 }
@@ -163,10 +223,10 @@
 }
 
 @media only screen and (max-width: 780px) {
-  .navbar.open {
+  .navbar_list.open {
     position: fixed;
-    transform: translateX(-20%);
-    background-color: #272626;
+    transform: translateX(-80%);
+    background-color: var(--color-primary-dark);
   }
 }
 

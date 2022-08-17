@@ -25,17 +25,17 @@ export default function Navbar() {
 
 	return (
 		<div className='navbar-container'>
-			<div
-				onClick={() => setOpenNavbar(!openNavbar)}
-				className={openNavbar ? `hamburger-menu open` : `hamburger-menu`}
-			>
-				<div className='line'></div>
-			</div>
 			<div className='navbar'>
 				<div className='logo'>
 					<img src={logo} alt='' />
 				</div>
-				<ul className='navbar_list'>
+				<ul className={openNavbar ? `navbar_list open` : `navbar_list`}>
+					<div
+						onClick={() => setOpenNavbar(!openNavbar)}
+						className={openNavbar ? `hamburger-menu open` : `hamburger-menu`}
+					>
+						<div className='line'></div>
+					</div>
 					<li className='navbar_list--item'>
 						<Link className='navbar_link' to='/'>
 							Home

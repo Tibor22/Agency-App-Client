@@ -42,6 +42,11 @@ html {
     font-size: 50%;
   }
 }
+@media screen and (max-width: 400px) {
+  html {
+    font-size: 45%;
+  }
+}
 
 .center {
   display: grid;

@@ -5,6 +5,11 @@
   width: 90%;
   border-radius: 8px;
 }
+@media screen and (max-width: 780px) {
+  .searchbar-form {
+    width: 100%;
+  }
+}
 .searchbar-form--controller-type {
   width: 55%;
 }
