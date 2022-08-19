@@ -15,6 +15,7 @@ import SignIn from './pages/SignIn/SignIn';
 import SideBar from './components/SideBar/SideBar';
 import JobForm from './pages/JobForm/JobForm';
 import Profile from './pages/Profile/Profile';
+import UnderDevelopment from './pages/UnderDevelopment/UnderDevelopment';
 
 function App() {
 	const [user, dispatch] = useContext(UserContext);
@@ -37,6 +38,7 @@ function App() {
 					<Route path='/jobPost' element={<JobForm />} />
 				)}
 				{user.isLoggedIn && <Route path='/profile' element={<Profile />} />}
+				<Route path='under-development' element={<UnderDevelopment />} />
 			</Routes>
 		</BrowserRouter>
 	);

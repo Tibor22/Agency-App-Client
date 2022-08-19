@@ -49,22 +49,28 @@ export default function SideBar() {
 					)}
 				</li>
 				<li className='sideBar-list_item'>
-					<a href=''>
-						{' '}
-						<img src={uploadDOC} alt='upload docs' title='upload docs' />
-					</a>
+					<Link to='under-development'>
+						<a href=''>
+							{' '}
+							<img src={uploadDOC} alt='upload docs' title='upload docs' />
+						</a>
+					</Link>
 				</li>
 				<li className='sideBar-list_item'>
-					<a href=''>
-						{' '}
-						<img src={statistics} alt='statistics' title='statistics' />
-					</a>
+					<Link to='under-development'>
+						<a href=''>
+							{' '}
+							<img src={statistics} alt='statistics' title='statistics' />
+						</a>
+					</Link>
 				</li>
 				<li className='sideBar-list_item'>
-					<a href=''>
-						{' '}
-						<img src={payments} alt='payments' title='payments' />
-					</a>
+					<Link to='under-development'>
+						<a href=''>
+							{' '}
+							<img src={payments} alt='payments' title='payments' />
+						</a>
+					</Link>
 				</li>
 			</ul>
 		</div>

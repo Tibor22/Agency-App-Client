@@ -1,0 +1,20 @@
+.under-development-container {
+	height: calc(100vh - 6rem);
+	width: 100%;
+	display: grid;
+	place-items: center;
+	background-color: var(--color-primary);
+}
+
+.under-development {
+	&-header {
+		text-align: center;
+		font-size: 3rem;
+	}
+
+	&-img {
+		img {
+			max-width: 100%;
+		}
+	}
+}
