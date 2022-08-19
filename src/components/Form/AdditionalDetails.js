@@ -46,6 +46,11 @@ export default function AdditionalDetails({ setCurrentStep, currStep }) {
 			setIsPending(false);
 			return;
 		}
+		if (!formData.DoB) {
+			setErrorMsg('Please choose a Date');
+			setIsPending(false);
+			return;
+		}
 		const userData = {
 			...formData,
 			terms: true,

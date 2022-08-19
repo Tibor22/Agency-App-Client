@@ -15,7 +15,6 @@ import SignIn from './pages/SignIn/SignIn';
 import SideBar from './components/SideBar/SideBar';
 import JobForm from './pages/JobForm/JobForm';
 import Profile from './pages/Profile/Profile';
-import fetchProfile from './utils/fetchProfile';
 
 function App() {
 	const [user, dispatch] = useContext(UserContext);
