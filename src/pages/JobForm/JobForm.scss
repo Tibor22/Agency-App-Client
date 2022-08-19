@@ -143,6 +143,8 @@
 	border: none;
 	margin-top: 1rem;
 	transition: all 0.3s;
+	display: block;
+	margin-bottom: 2.3rem;
 	&:hover {
 		transform: translateY(-2px);
 		scale: 1.1;

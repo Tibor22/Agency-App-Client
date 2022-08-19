@@ -22,6 +22,7 @@ export default function JobForm() {
 	});
 	let navigate = useNavigate();
 	const [loading, setLoading] = useState(null);
+	const [errorMsg, setErrorMsg] = useState(null);
 	const currUser = JSON.parse(localStorage.getItem('user'));
 	const [user, dispatch] = useContext(UserContext);
 	const styles = {
@@ -38,6 +39,11 @@ export default function JobForm() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (formData.startDate === '' || formData.endDate === '') {
+			setErrorMsg('Please Choose Start and End Date');
+			return;
+		}
+
 		setLoading(true);
 		const myRenamedFile = new File(
 			[formData.file],
@@ -88,6 +94,7 @@ export default function JobForm() {
 						<label className='jobForm-controller'>
 							<span>Company Name</span>
 							<input
+								required
 								onChange={handleChange}
 								type='text'
 								name='companyName'
@@ -101,6 +108,7 @@ export default function JobForm() {
 								type='text'
 								value={formData.jobType}
 								name='jobType'
+								required
 							/>
 						</label>
 						<label className='jobForm-controller'>
@@ -110,6 +118,7 @@ export default function JobForm() {
 								type='text'
 								value={formData.location}
 								name='location'
+								required
 							/>
 						</label>
 						<label className='jobForm-controller sm'>
@@ -136,6 +145,7 @@ export default function JobForm() {
 								placeholder='e.g. 9:30AM - 17:30AM'
 								value={formData.timeFrame}
 								name='timeFrame'
+								required
 							/>
 						</label>
 						<div className='jobForm-flex-container'>
@@ -147,6 +157,7 @@ export default function JobForm() {
 									placeholder='e.g. 10'
 									value={formData.salary}
 									name='salary'
+									required
 								/>
 							</label>
 							<label className='jobForm-controller sm'>
@@ -157,6 +168,7 @@ export default function JobForm() {
 									placeholder='e.g. 10'
 									value={formData.numOfApplicants}
 									name='numOfApplicants'
+									required
 								/>
 							</label>
 						</div>
@@ -175,10 +187,11 @@ export default function JobForm() {
 								id=''
 								cols='30'
 								rows='10'
+								required
 							></textarea>
 						</label>
-
 						<button className='btn-jobPost'>POST JOB</button>
+						{errorMsg && <span className='error'>{errorMsg}</span>}
 					</form>
 					{/* <img
 						src='http://localhost:4000/images/user (1).png0.25472359196203986.png'
