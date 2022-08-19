@@ -8,7 +8,6 @@ import './jobPost.css';
 export default function JobPost({ post, isOwned }) {
 	const host = process.env.REACT_APP_IMG_URL;
 	const textStyles = {
-		// textAlign: 'center',
 		fontSize: 15,
 		padding: '0 66px',
 	};

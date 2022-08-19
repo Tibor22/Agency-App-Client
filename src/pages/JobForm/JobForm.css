@@ -19,6 +19,11 @@
   position: relative;
   transform: translateX(-10rem);
 }
+@media screen and (max-width: 330px) {
+  .jobForm-container--header {
+    font-size: 3rem;
+  }
+}
 
 .jobForm-span {
   display: inline-block;
@@ -51,9 +56,24 @@
   margin-bottom: 3rem;
   position: relative;
 }
+@media screen and (max-width: 920px) {
+  .jobForm-inner-container {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 330px) {
+  .jobForm-inner-container {
+    padding: 0rem;
+  }
+}
 
 .jobForm {
   padding: 1.5rem;
+}
+@media screen and (max-width: 330px) {
+  .jobForm {
+    padding: 0rem;
+  }
 }
 .jobForm-controller {
   display: block;
@@ -95,6 +115,17 @@
   display: flex;
   gap: 1rem;
 }
+@media screen and (max-width: 920px) {
+  .jobForm-image .JobForm-img-container img {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 330px) {
+  .jobForm-image .JobForm-img-container img {
+    max-width: 80%;
+  }
+}
+
 .btn-jobPost {
   width: 50%;
   padding: 1.1rem;
