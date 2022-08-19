@@ -47,7 +47,7 @@ export default function EmployerProfile({
 		}
 	};
 	return (
-		<div className='profile'>
+		<div className='profile employer'>
 			<div className='profile-img'>
 				<div className='profile-img-container'>
 					<img
