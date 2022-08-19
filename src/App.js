@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../src/context/UserContext';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -15,10 +15,12 @@ import SignIn from './pages/SignIn/SignIn';
 import SideBar from './components/SideBar/SideBar';
 import JobForm from './pages/JobForm/JobForm';
 import Profile from './pages/Profile/Profile';
+import fetchProfile from './utils/fetchProfile';
 
 function App() {
 	const [user, dispatch] = useContext(UserContext);
 	console.log(user);
+
 	return (
 		<BrowserRouter>
 			<Navbar />

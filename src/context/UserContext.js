@@ -1,4 +1,5 @@
 import { useReducer, createContext, useEffect } from 'react';
+import fetchProfile from '../utils/fetchProfile';
 export const UserContext = createContext();
 
 export const userReducer = (state, action) => {
@@ -26,8 +27,18 @@ export default function UserContextProvider({ children }) {
 
 	useEffect(() => {
 		const user = JSON.parse(localStorage.getItem('user'));
+		let data;
 		if (user) {
 			dispatch({ type: 'LOGIN', payload: user });
+			async function updateProfile() {
+				const res = await fetchProfile(user);
+				user.type === 'employee'
+					? (data = res.data.jobPosts)
+					: (data = res.data.employerProfile.jobPost);
+
+				dispatch({ type: 'ADDPOST', payload: data });
+			}
+			updateProfile();
 		}
 	}, []);
 
