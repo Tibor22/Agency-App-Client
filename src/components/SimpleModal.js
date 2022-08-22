@@ -48,6 +48,7 @@ export default function SimpleModal({ setHideModal, post }) {
 				`/user/profile/connect-profile/${currUser.userId}`,
 				dataToSend
 			);
+			await client.patch(`/posts/update/${post.id}`);
 
 			let data;
 			const res = await fetchProfile(currUser);
