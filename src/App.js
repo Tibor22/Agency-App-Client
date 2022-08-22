@@ -35,7 +35,10 @@ function App() {
 				<Route path='/posts/:id' element={<JobPost />} />
 				<Route path='/sign-in/:type' element={<SignIn />} />
 				{user.isLoggedIn && user.user.type === 'employer' && (
-					<Route path='/jobPost' element={<JobForm />} />
+					<>
+						<Route path='/jobPost' element={<JobForm />} />
+						{/* <Route path='/jobPost/update/:id' element={<JobForm />} /> */}
+					</>
 				)}
 				{user.isLoggedIn && <Route path='/profile' element={<Profile />} />}
 				<Route path='under-development' element={<UnderDevelopment />} />

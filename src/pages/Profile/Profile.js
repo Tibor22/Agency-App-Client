@@ -25,6 +25,17 @@ export default function Profile() {
 		getUser();
 	}, []);
 
+	async function handleDelete(e, post) {
+		console.log(post, 'CLICKed');
+		setIsLoading(true);
+		await client.delete(
+			`/posts/${post.id}?profileId=${post.employerProfileId}`
+		);
+		const res = await fetchProfile(currUser);
+		setUser(res.data);
+		setIsLoading(false);
+	}
+
 	const uploadImage = async () => {
 		setIsLoading(true);
 		const myRenamedFile = new File(
@@ -92,7 +103,13 @@ export default function Profile() {
 					{currUser?.type === 'employer' &&
 						user &&
 						user.employerProfile?.jobPost.map((post, i) => {
-							return <JobPostCard key={post.id} post={post} />;
+							return (
+								<JobPostCard
+									handleDelete={handleDelete}
+									key={post.id}
+									post={post}
+								/>
+							);
 						})}
 					{currUser?.type === 'employee' &&
 						user?.jobPosts &&

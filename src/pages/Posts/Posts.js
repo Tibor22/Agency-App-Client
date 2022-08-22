@@ -13,6 +13,8 @@ import { PostsContext } from '../../context/PostsContext';
 import { UserContext } from '../../context/UserContext';
 import JobPost from '../../pages/JobPost/JobPost';
 import JobPostCard from '../../components/JobPostCard';
+import client from '../../utils/client';
+import { Link } from 'react-router-dom';
 
 export default function Posts() {
 	const [formData, setFormData] = useState('');
@@ -21,7 +23,10 @@ export default function Posts() {
 	const [state, dispatch] = useContext(UserContext);
 	const [query, setQuery] = useState(postsQuery);
 	const [pageNumber, setPageNumber] = useState(0);
-	const { posts, hasMore, loading, error } = usePostsSearch(query, pageNumber);
+	const { posts, setPosts, hasMore, loading, error } = usePostsSearch(
+		query,
+		pageNumber
+	);
 	const host = process.env.REACT_APP_IMG_URL;
 
 	setPostsQuery(null);
@@ -42,6 +47,19 @@ export default function Posts() {
 
 	console.log(state);
 
+	async function handleDelete(e, post) {
+		console.log(post, 'CLICKed');
+		await client.delete(
+			`/posts/${post.id}?profileId=${post.employerProfileId}`
+		);
+
+		setPosts((prevPosts) => {
+			return (prevPosts = prevPosts.filter((post1) => {
+				if (post1.id !== post.id) return true;
+			}));
+		});
+	}
+
 	function handleSearch(e) {
 		const { value, name } = e.target;
 		console.log(name, value);
@@ -54,6 +72,8 @@ export default function Posts() {
 	function handleSubmit(e) {
 		e.preventDefault();
 	}
+
+	console.log(posts);
 
 	return (
 		<div className='posts-outer-container'>
@@ -130,6 +150,26 @@ export default function Posts() {
 												answer ? 'green' : ''
 											}`}
 										>
+											{!post.anyoneApplied &&
+												state.user.profileId === post.employerProfileId &&
+												state.user.type === 'employer' && (
+													<>
+														<div className='post-edit'>
+															<Link
+																to={`/jobPost`}
+																state={{ ...post, isEditing: true }}
+															>
+																Edit
+															</Link>
+														</div>
+														<div
+															onClick={(e) => handleDelete(e, post)}
+															className='post-delete'
+														>
+															x
+														</div>
+													</>
+												)}
 											<div className='company-main'>
 												<div className='company-logo'>
 													<img src={`${host}${post.imageUrl}`} alt='' />
@@ -163,7 +203,13 @@ export default function Posts() {
 										</div>
 									);
 								} else {
-									return <JobPostCard key={i} post={post} />;
+									return (
+										<JobPostCard
+											handleDelete={handleDelete}
+											key={i}
+											post={post}
+										/>
+									);
 								}
 							})}
 						<div className='loader-container'>

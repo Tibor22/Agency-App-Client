@@ -83,6 +83,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
+		position: relative;
 		& .company-main {
 			grid-column: 1/3;
 			grid-row: 1/2;
@@ -212,4 +213,40 @@
 
 .posts-container_posts--card.green {
 	border: 5px solid rgb(65, 227, 65);
+}
+
+///Edit
+
+.post-edit {
+	position: absolute;
+	top: 0.4rem;
+	right: 3rem;
+	font-size: 1.6rem;
+	transition: all 0.3s;
+	&:hover {
+		transform: scale(1.1);
+		color: rgb(65, 227, 65);
+		cursor: pointer;
+		font-weight: bolder;
+	}
+	& a {
+		text-decoration: none;
+		color: var(--color-primary-hover);
+	}
+}
+
+//Delete
+
+.post-delete {
+	position: absolute;
+	top: 0;
+	right: 1rem;
+	font-size: 2rem;
+	transition: all 0.3s;
+	&:hover {
+		transform: scale(1.1);
+		color: red;
+		cursor: pointer;
+		font-weight: bolder;
+	}
 }

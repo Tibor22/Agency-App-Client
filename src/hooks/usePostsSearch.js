@@ -43,5 +43,5 @@ export default function usePostsSearch(query, pageNumber) {
 		return () => cancel();
 	}, [query, pageNumber]);
 
-	return { loading, error, posts, hasMore };
+	return { loading, error, posts, hasMore, setPosts };
 }

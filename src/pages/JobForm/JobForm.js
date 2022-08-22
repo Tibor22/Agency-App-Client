@@ -4,11 +4,15 @@ import { useState } from 'react';
 import UploadImage from '../../components/UploadImage/UploadImage';
 import client from '../../utils/client';
 import jobFormLG from '../../assets/jobFormLG.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import fetchProfile from '../../utils/fetchProfile';
 export default function JobForm() {
+	const location = useLocation();
+	const postToUpdate = location.state;
+	console.log(postToUpdate);
+
 	const [formData, setFormData] = useState({
 		companyName: '',
 		jobType: '',
@@ -20,6 +24,11 @@ export default function JobForm() {
 		numOfApplicants: '',
 		file: '',
 	});
+	useEffect(() => {
+		if (postToUpdate?.isEditing) {
+			setFormData({ ...postToUpdate, file: '' });
+		}
+	}, []);
 	let navigate = useNavigate();
 	const [loading, setLoading] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
@@ -36,14 +45,18 @@ export default function JobForm() {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
 	};
+	console.log('FORMDATA', formData);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		if (formData.file) {
+			delete formData.imageUrl;
+		}
 		if (formData.startDate === '' || formData.endDate === '') {
 			setErrorMsg('Please Choose Start and End Date');
 			return;
 		}
-
 		setLoading(true);
 		const myRenamedFile = new File(
 			[formData.file],
@@ -51,19 +64,38 @@ export default function JobForm() {
 		);
 		let formData1 = new FormData();
 		formData1.append('file', myRenamedFile);
-
+		console.log('IMAGE NAME:', myRenamedFile.name);
 		const jobToSend = {
 			...formData,
-			startDate: formData.startDate.toISOString(),
-			endDate: formData.endDate.toISOString(),
-			imgUrl: myRenamedFile.name,
+			startDate:
+				typeof formData.getMonth === 'function'
+					? formData.startDate.toISOString()
+					: formData.startDate,
+			endDate:
+				typeof formData.getMonth === 'function'
+					? formData.endDate.toISOString()
+					: formData.endDate,
+			imgUrl: formData.file ? myRenamedFile.name : formData.imageUrl,
 		};
 
-		await client.post('/posts/create', jobToSend);
-		await fetch(`${process.env.REACT_APP_API_URL}/posts/image`, {
-			method: 'POST',
-			body: formData1,
-		});
+		if (postToUpdate?.isEditing) {
+			delete jobToSend.isEditing;
+			jobToSend.imageUrl = jobToSend.imgUrl;
+			jobToSend.profileId = jobToSend.employerProfileId;
+			delete jobToSend.employerProfileId;
+			delete jobToSend.imgUrl;
+			delete jobToSend.file;
+			await client.patch(`/posts/update/${postToUpdate.id}`, jobToSend);
+		} else {
+			await client.post('/posts/create', jobToSend);
+		}
+		if (formData.file) {
+			await fetch(`${process.env.REACT_APP_API_URL}/posts/image`, {
+				method: 'POST',
+				body: formData1,
+			});
+		}
+
 		let data;
 
 		const res = await fetchProfile(currUser);
@@ -72,10 +104,22 @@ export default function JobForm() {
 			: (data = res.data.employerProfile.jobPost);
 
 		dispatch({ type: 'ADDPOST', payload: data });
+		setFormData({
+			companyName: '',
+			jobType: '',
+			location: '',
+			startDate: '',
+			endDate: '',
+			timeFrame: '',
+			salary: '',
+			numOfApplicants: '',
+			file: '',
+		});
 		setLoading(false);
 		navigate('/posts', { replace: true });
 	};
 
+	console.log('FORMDATA:', formData);
 	return (
 		<div className='jobForm-outer-container'>
 			<div className='jobForm-container'>
@@ -188,6 +232,7 @@ export default function JobForm() {
 								cols='30'
 								rows='10'
 								required
+								value={formData.content}
 							></textarea>
 						</label>
 						<button className='btn-jobPost'>POST JOB</button>

@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
+import { useLocation, Link } from 'react-router-dom';
 import DateFormatter from '../utils/DateFormatter';
 
-export default function JobPostCard({ post, userType }) {
+export default function JobPostCard({ post, userType, handleDelete }) {
 	const location = <FontAwesomeIcon icon={faLocationDot} />;
 	const [state, dispatch] = useContext(UserContext);
 	const answer = state?.user?.jobPosts
@@ -14,6 +15,21 @@ export default function JobPostCard({ post, userType }) {
 	const host = process.env.REACT_APP_IMG_URL;
 	return (
 		<div className={`posts-container_posts--card ${answer ? 'green' : ''}`}>
+			{!post.anyoneApplied &&
+				state.user.profileId === post.employerProfileId &&
+				state.user.type === 'employer' && (
+					<>
+						<div className='post-edit'>
+							<Link to={`/jobPost`} state={{ ...post, isEditing: true }}>
+								Edit
+							</Link>
+						</div>
+						<div onClick={(e) => handleDelete(e, post)} className='post-delete'>
+							x
+						</div>
+					</>
+				)}
+
 			<div className='company-main'>
 				<div className='company-logo'>
 					<img src={`${host}${post.imageUrl}`} alt='' />
