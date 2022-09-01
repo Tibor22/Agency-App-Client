@@ -151,8 +151,8 @@ export default function Posts() {
 											}`}
 										>
 											{!post.anyoneApplied &&
-												state.user.profileId === post.employerProfileId &&
-												state.user.type === 'employer' && (
+												state.user?.profileId === post?.employerProfileId &&
+												state?.user.type === 'employer' && (
 													<>
 														<div className='post-edit'>
 															<Link

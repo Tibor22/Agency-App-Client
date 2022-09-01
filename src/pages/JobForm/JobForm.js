@@ -85,11 +85,14 @@ export default function JobForm() {
 			delete jobToSend.employerProfileId;
 			delete jobToSend.imgUrl;
 			delete jobToSend.file;
+
 			await client.patch(`/posts/update/${postToUpdate.id}`, jobToSend);
 		} else {
+			console.log('POST JobtoSend', jobToSend);
 			await client.post('/posts/create', jobToSend);
 		}
 		if (formData.file) {
+			console.log('INSIDE update without image and jobToSend', jobToSend);
 			await fetch(`${process.env.REACT_APP_API_URL}/posts/image`, {
 				method: 'POST',
 				body: formData1,
