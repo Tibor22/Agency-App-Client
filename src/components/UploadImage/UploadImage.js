@@ -1,23 +1,25 @@
 export default function UploadImage({ setFormData, formData, styles, title }) {
 	const handleFileChange = (e) => {
-		const img = {
-			preview: URL.createObjectURL(e.target.files[0]),
-			data: e.target.files[0],
-		};
+		const file = e.target.files[0];
+		// setFile(file)
+		// const img = {
+		// 	preview: URL.createObjectURL(e.target.files[0]),
+		// 	data: e.target.files[0],
+		// };
 
-		setFormData({ ...formData, file: img.data });
+		setFormData({ ...formData, file });
 	};
 
 	return (
 		<>
-			<label style={styles} htmlFor='myfile'>
+			<label style={styles} htmlFor='image'>
 				{title}
 			</label>
 			<input
 				onChange={handleFileChange}
 				type='file'
-				id='myfile'
-				name='myfile'
+				id='image'
+				name='image'
 			></input>
 		</>
 	);

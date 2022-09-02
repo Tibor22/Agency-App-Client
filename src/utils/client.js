@@ -29,12 +29,15 @@ const client = {
 		return axios.delete(url, { headers });
 	},
 
-	post: (path, data, withToken = true) => {
+	post: (path, data, img = false, withToken = true) => {
 		const url = `${host}${path}`;
 		const token = localStorage.getItem(tokenKey);
 		let headers = {};
 		if (withToken) {
 			headers['Authorization'] = `Bearer ${token}`;
+			if (img) {
+				headers['Content-Type'] = 'multipart/form-data';
+			}
 		}
 		console.log(host);
 		console.log(tokenKey);
