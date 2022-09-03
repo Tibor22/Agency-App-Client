@@ -32,7 +32,7 @@ export default function JobPostCard({ post, userType, handleDelete }) {
 
 			<div className='company-main'>
 				<div className='company-logo'>
-					<img src={`${host}${post.imageUrl}`} alt='' />
+					<img src={post.imageUrl} alt='' />
 				</div>
 				<div className='name-address-flex'>
 					<div className='company-name'>{post.companyName}</div>

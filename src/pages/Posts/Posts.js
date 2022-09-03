@@ -45,7 +45,7 @@ export default function Posts() {
 		[loading, hasMore]
 	);
 
-	console.log(state);
+	console.log(posts);
 
 	async function handleDelete(e, post) {
 		console.log(post, 'CLICKed');
@@ -172,7 +172,7 @@ export default function Posts() {
 												)}
 											<div className='company-main'>
 												<div className='company-logo'>
-													<img src={`${host}${post.imageUrl}`} alt='' />
+													<img src={post.imageUrl} alt='' />
 												</div>
 												<div className='name-address-flex'>
 													<div className='company-name'>{post.companyName}</div>

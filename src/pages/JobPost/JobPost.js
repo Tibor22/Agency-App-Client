@@ -76,7 +76,7 @@ export default function JobPost({ post, isOwned }) {
 						>
 							<div className='modalContainer'>
 								<div className='modal-img-container'>
-									<img src={`${host}${post.imageUrl}`} alt='' />
+									<img src={post.imageUrl} alt='' />
 								</div>
 
 								<h2 className='modal-header'>{post.jobType}</h2>

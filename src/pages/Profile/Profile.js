@@ -24,7 +24,7 @@ export default function Profile() {
 		};
 		getUser();
 	}, []);
-
+	console.log(user);
 	async function handleDelete(e, post) {
 		console.log(post, 'CLICKed');
 		setIsLoading(true);
