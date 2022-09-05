@@ -8,7 +8,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { useContext, useEffect } from 'react';
 import fetchProfile from '../../utils/fetchProfile';
-import axios from 'axios';
 export default function JobForm() {
 	const location = useLocation();
 	const postToUpdate = location.state;
@@ -90,8 +89,6 @@ export default function JobForm() {
 			await client.post('/posts/create', formData1, true);
 		}
 		if (postToUpdate?.isEditing) {
-			console.log('EDITED FORMDATA', formData1);
-
 			await client.patch(`/posts/update/${postToUpdate.id}`, formData1, true);
 		}
 
