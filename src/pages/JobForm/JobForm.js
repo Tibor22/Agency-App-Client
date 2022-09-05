@@ -46,73 +46,54 @@ export default function JobForm() {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
 	};
-	console.log('FORMDATA', formData);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		// if (formData.file) {
-		// 	delete formData.imageUrl;
-		// }
 		if (formData.startDate === '' || formData.endDate === '') {
 			setErrorMsg('Please Choose Start and End Date');
 			return;
 		}
 		setLoading(true);
-		// const myRenamedFile = new File(
-		// 	[formData.file],
-		// 	`${formData.file.name}${String(Math.random())}.png`
-		// );
+
 		let formData1 = new FormData();
 		formData1.append('image', formData.file);
 
 		for (let [key, value] of Object.entries(formData)) {
 			if (key === 'file') continue;
 			if (key === 'startDate' || key === 'endDate') {
-				value = value.toISOString();
+				if (!postToUpdate?.isEditing) {
+					value = value.toISOString();
+				}
 			}
+			if (postToUpdate?.isEditing && key === 'employerProfileId') {
+				key = 'profileId';
+			}
+			if (postToUpdate?.isEditing && key === 'isEditing') {
+				continue;
+			}
+			if (postToUpdate?.isEditing && key === 'startDate') {
+				typeof formData[key].getMonth === 'function'
+					? (value = value.toISOString())
+					: (value = formData.startDate);
+			}
+			if (postToUpdate?.isEditing && key === 'endDate') {
+				typeof formData[key].getMonth === 'function'
+					? (value = value.toISOString())
+					: (value = formData.endDate);
+			}
+
 			formData1.append(key, value);
 		}
-		//
-		// console.log('IMAGE NAME:', myRenamedFile.name);
-		await client.post('/posts/create', formData1, true);
-		console.log('FORMDATA1:,', formData1);
-		// await axios.post('http://localhost:4000/v1/posts/create', formData1, {
-		// 	headers: { 'Content-Type': 'multipart/form-data' },
-		// });
-		// const jobToSend = {
-		// 	...formData,
-		// 	startDate:
-		// 		typeof formData.getMonth === 'function'
-		// 			? formData.startDate.toISOString()
-		// 			: formData.startDate,
-		// 	endDate:
-		// 		typeof formData.getMonth === 'function'
-		// 			? formData.endDate.toISOString()
-		// 			: formData.endDate,
-		// 	imgUrl: formData.file ? myRenamedFile.name : formData.imageUrl,
-		// };
 
-		// if (postToUpdate?.isEditing) {
-		// 	delete jobToSend.isEditing;
-		// 	jobToSend.imageUrl = jobToSend.imgUrl;
-		// 	jobToSend.profileId = jobToSend.employerProfileId;
-		// 	delete jobToSend.employerProfileId;
-		// 	delete jobToSend.imgUrl;
-		// 	delete jobToSend.file;
+		if (!postToUpdate?.isEditing) {
+			await client.post('/posts/create', formData1, true);
+		}
+		if (postToUpdate?.isEditing) {
+			console.log('EDITED FORMDATA', formData1);
 
-		// 	await client.patch(`/posts/update/${postToUpdate.id}`, jobToSend);
-		// } else {
-		// 	console.log('POST JobtoSend', jobToSend);
-		// 	await client.post('/posts/create', jobToSend);
-		// }
-		// if (formData.file) {
-		// 	console.log('INSIDE update without image and jobToSend', jobToSend);
-		// 	await fetch(`${process.env.REACT_APP_API_URL}/posts/image`, {
-		// 		method: 'POST',
-		// 		body: formData1,
-		// 	});
-		// }
+			await client.patch(`/posts/update/${postToUpdate.id}`, formData1, true);
+		}
 
 		let data;
 
@@ -137,7 +118,6 @@ export default function JobForm() {
 		navigate('/posts', { replace: true });
 	};
 
-	console.log('FORMDATA:', formData);
 	return (
 		<div className='jobForm-outer-container'>
 			<div className='jobForm-container'>

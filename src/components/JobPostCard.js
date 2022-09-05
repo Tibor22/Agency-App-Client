@@ -16,6 +16,7 @@ export default function JobPostCard({ post, userType, handleDelete }) {
 	return (
 		<div className={`posts-container_posts--card ${answer ? 'green' : ''}`}>
 			{!post.anyoneApplied &&
+				state.user &&
 				state.user.profileId === post.employerProfileId &&
 				state.user.type === 'employer' && (
 					<>

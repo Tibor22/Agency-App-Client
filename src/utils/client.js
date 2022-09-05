@@ -13,11 +13,14 @@ const client = {
 		return axios.get(url, { headers });
 	},
 
-	patch: (path, data) => {
+	patch: (path, data, img = false) => {
 		const url = `${host}${path}`;
 		const headers = {
 			Authorization: `Bearer ${localStorage.getItem(tokenKey)}`,
 		};
+		if (img) {
+			headers['Content-Type'] = 'multipart/form-data';
+		}
 		return axios.patch(url, data, { headers });
 	},
 
