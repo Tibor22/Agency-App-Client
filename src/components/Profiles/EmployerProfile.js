@@ -52,7 +52,7 @@ export default function EmployerProfile({
 				<div className='profile-img-container'>
 					<img
 						src={
-							`${host}/${user.employerProfile.profileImgUrl}` || {
+							`${user.employerProfile.profileImgUrl}` || {
 								profileIMG,
 							}
 						}

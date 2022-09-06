@@ -49,7 +49,7 @@ export default function EmployeeProfile({
 					<img
 						className='profileImg'
 						src={
-							`${host}/${user.employeeProfile.profileImgUrl}` || {
+							`${user.employeeProfile.profileImgUrl}` || {
 								profileIMG,
 							}
 						}

@@ -38,23 +38,15 @@ export default function Profile() {
 
 	const uploadImage = async () => {
 		setIsLoading(true);
-		const myRenamedFile = new File(
-			[uploadProfileImage.file],
-			`${uploadProfileImage.file.name}${String(
-				Math.random()
-			)}.${uploadProfileImage.file.name.slice(-3)}`
-		);
-		let formData1 = new FormData();
-		formData1.append('file', myRenamedFile);
-		const imgToSend = {
-			profileImgUrl: myRenamedFile.name,
-		};
 
-		await client.patch(`/user/profile/update/${currUser.userId}`, imgToSend);
-		await fetch(`${host}/v1/user/image`, {
-			method: 'POST',
-			body: formData1,
-		});
+		let formData1 = new FormData();
+		formData1.append('image', uploadProfileImage.file);
+
+		await client.patch(
+			`/user/profile/update/${currUser.userId}`,
+			formData1,
+			true
+		);
 
 		const res = await fetchProfile(currUser);
 		setUser(res.data);
