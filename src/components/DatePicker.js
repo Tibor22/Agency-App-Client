@@ -36,7 +36,6 @@ export default function DatePickerFunc({
 					id='datePicker-1'
 					value={formData[dateType] || new Date()}
 					onChange={(value) => handleChange(value)}
-					label=''
 					formatStyle='large'
 					minDate={dateName && new Date()}
 				/>
