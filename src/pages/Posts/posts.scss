@@ -5,7 +5,7 @@
 	margin: 0 auto;
 	background-color: var(--color-primary);
 	max-width: 120rem;
-	height: calc(100vh - 6rem);
+	min-height: calc(100vh - 6rem);
 	padding: 2rem;
 	overflow-y: hidden;
 	@media screen and (max-width: 525px) {
