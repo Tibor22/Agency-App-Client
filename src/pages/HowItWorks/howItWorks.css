@@ -250,11 +250,18 @@
   .cloud {
     margin-top: 0rem;
     border-radius: 8px;
+    font-size: 1.7rem;
   }
 }
 .cloud h2 {
   margin-bottom: 0.9rem;
   text-align: center;
+}
+@media screen and (max-width: 670px) {
+  .cloud h2 {
+    order: 1;
+    font-size: 3rem;
+  }
 }
 
 .speech-bubble {

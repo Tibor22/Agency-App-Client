@@ -46,6 +46,9 @@
 		&--text {
 			font-size: 1.37rem;
 			line-height: 2rem;
+			@media screen and (max-width: 670px) {
+				font-size: 1.7rem;
+			}
 		}
 	}
 
@@ -56,6 +59,9 @@
 				display: block;
 				margin-bottom: 0.4rem;
 				font-size: 1.2rem;
+				@media screen and (max-width: 670px) {
+					font-size: 1.5rem;
+				}
 			}
 
 			& input {

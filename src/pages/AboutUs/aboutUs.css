@@ -47,6 +47,11 @@
   width: 70%;
   font-size: 1.5rem;
 }
+@media screen and (max-width: 670px) {
+  .aboutUs_desc--text {
+    font-size: 1.7rem;
+  }
+}
 .aboutUs_image--container {
   width: 40%;
 }
@@ -128,6 +133,11 @@
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
+@media screen and (max-width: 670px) {
+  .who-we-are_desc--text {
+    font-size: 1.7rem;
+  }
+}
 .who-we-are_image--container {
   width: 40%;
 }
@@ -193,9 +203,14 @@
   text-align: center;
 }
 .what-we-do_card--text {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   padding: 1.5rem;
   text-align: center;
+}
+@media screen and (max-width: 670px) {
+  .what-we-do_card--text {
+    font-size: 1.7rem;
+  }
 }
 .what-we-do_card img {
   margin: 1rem 0rem 1rem 0rem;

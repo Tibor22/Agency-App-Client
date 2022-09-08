@@ -65,6 +65,11 @@
   border: 1px solid var(--color-primary-hover);
   border-radius: 2px;
 }
+@media screen and (max-width: 600px) {
+  .sign-form input {
+    font-size: 1.6rem;
+  }
+}
 
 .btn-blue {
   background-color: var(--color-primary-hover);
@@ -76,7 +81,7 @@
   cursor: pointer;
   transition: all 0.3s;
   border-radius: 2px;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 .btn-blue:hover {
   background-color: var(--color-primary-hover);
@@ -93,6 +98,11 @@
 
 .form-controller span {
   font-size: 1.3rem;
+}
+@media screen and (max-width: 600px) {
+  .form-controller span {
+    font-size: 1.5rem;
+  }
 }
 
 .form-controller span.mb-sm {

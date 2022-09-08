@@ -57,6 +57,11 @@
   margin-bottom: 0.6rem;
   font-size: 1.5rem;
 }
+@media screen and (max-width: 525px) {
+  .posts-sidebar_form-controller span {
+    font-size: 1.7rem;
+  }
+}
 
 .jobstart-span {
   transform: translateY(1.5rem);
