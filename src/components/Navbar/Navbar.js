@@ -37,7 +37,11 @@ export default function Navbar() {
 						<div className='line'></div>
 					</div>
 					<li className='navbar_list--item'>
-						<Link className='navbar_link' to='/'>
+						<Link
+							onClick={() => setOpenNavbar(false)}
+							className='navbar_link'
+							to='/'
+						>
 							Home
 						</Link>
 					</li>
@@ -45,12 +49,14 @@ export default function Navbar() {
 						How It Works
 						<div className='dropdown'>
 							<Link
+								onClick={() => setOpenNavbar(false)}
 								className='navbar_link-dropdown'
 								to='/how-it-works/employee'
 							>
 								For Employee
 							</Link>
 							<Link
+								onClick={() => setOpenNavbar(false)}
 								className='navbar_link-dropdown'
 								to='/how-it-works/employer'
 							>
@@ -59,17 +65,29 @@ export default function Navbar() {
 						</div>
 					</li>
 					<li className='navbar_list--item'>
-						<Link className='navbar_link' to='/posts'>
+						<Link
+							onClick={() => setOpenNavbar(false)}
+							className='navbar_link'
+							to='/posts'
+						>
 							Jobs
 						</Link>
 					</li>
 					<li className='navbar_list--item'>
-						<Link className='navbar_link' to='/about'>
+						<Link
+							onClick={() => setOpenNavbar(false)}
+							className='navbar_link'
+							to='/about'
+						>
 							About Us
 						</Link>
 					</li>
 					<li className='navbar_list--item'>
-						<Link className='navbar_link' to='/contact'>
+						<Link
+							onClick={() => setOpenNavbar(false)}
+							className='navbar_link'
+							to='/contact'
+						>
 							Contact Us
 						</Link>
 					</li>
@@ -78,10 +96,18 @@ export default function Navbar() {
 						{name ? 'Sign Out' : 'Sign In'} {element}
 						{!name && (
 							<div className='dropdown'>
-								<Link className='navbar_link-dropdown' to='/sign-in/employee'>
+								<Link
+									onClick={() => setOpenNavbar(false)}
+									className='navbar_link-dropdown'
+									to='/sign-in/employee'
+								>
 									Employee
 								</Link>
-								<Link className='navbar_link-dropdown' to='/sign-in/employer'>
+								<Link
+									onClick={() => setOpenNavbar(false)}
+									className='navbar_link-dropdown'
+									to='/sign-in/employer'
+								>
 									Employer
 								</Link>
 							</div>
