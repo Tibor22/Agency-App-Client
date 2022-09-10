@@ -104,4 +104,14 @@ html {
   100% {
     transform: rotateY(3600deg);
   }
+}
+.loader-container {
+  width: 100vw;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.main-color {
+  background-color: var(--color-primary);
 }/*# sourceMappingURL=index.css.map */
