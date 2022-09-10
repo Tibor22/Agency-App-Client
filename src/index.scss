@@ -89,13 +89,10 @@ html {
 	}
 }
 
-.loader-container {
+.loader-container-main {
 	width: 100vw;
 	min-height: 100vh;
 	display: grid;
 	place-items: center;
-}
-
-.main-color {
 	background-color: var(--color-primary);
 }

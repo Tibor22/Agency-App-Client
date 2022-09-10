@@ -92,6 +92,14 @@
 .navbar_list--item:hover .navbar_link {
   color: var(--color-primary-dark);
 }
+.navbar .active {
+  background-color: var(--color-primary);
+  color: var(--color-primary-dark);
+  padding: 0.65rem 1.3rem;
+  border-radius: 3rem 0rem 3rem 0rem;
+  margin-left: -1.3rem;
+  margin-right: -1.3rem;
+}
 .navbar_link {
   color: #fff;
   text-decoration: none;

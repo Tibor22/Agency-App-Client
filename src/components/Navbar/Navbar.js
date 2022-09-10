@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 
 export default function Navbar() {
@@ -14,6 +14,7 @@ export default function Navbar() {
 	const navigate = useNavigate();
 	const [user, dispatch] = useContext(UserContext);
 	const [openNavbar, setOpenNavbar] = useState(false);
+
 	const signOut = () => {
 		if (name) {
 			localStorage.removeItem(process.env.REACT_APP_USER_TOKEN);
@@ -37,13 +38,13 @@ export default function Navbar() {
 						<div className='line'></div>
 					</div>
 					<li className='navbar_list--item'>
-						<Link
+						<NavLink
 							onClick={() => setOpenNavbar(false)}
 							className='navbar_link'
 							to='/'
 						>
 							Home
-						</Link>
+						</NavLink>
 					</li>
 					<li className='navbar_list--item how-it-works'>
 						How It Works
@@ -65,31 +66,31 @@ export default function Navbar() {
 						</div>
 					</li>
 					<li className='navbar_list--item'>
-						<Link
+						<NavLink
 							onClick={() => setOpenNavbar(false)}
 							className='navbar_link'
 							to='/posts'
 						>
 							Jobs
-						</Link>
+						</NavLink>
 					</li>
 					<li className='navbar_list--item'>
-						<Link
+						<NavLink
 							onClick={() => setOpenNavbar(false)}
 							className='navbar_link'
 							to='/about'
 						>
 							About Us
-						</Link>
+						</NavLink>
 					</li>
 					<li className='navbar_list--item'>
-						<Link
+						<NavLink
 							onClick={() => setOpenNavbar(false)}
 							className='navbar_link'
 							to='/contact'
 						>
 							Contact Us
-						</Link>
+						</NavLink>
 					</li>
 
 					<li onClick={signOut} className='navbar_list--item how-it-works '>
