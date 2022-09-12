@@ -3,6 +3,7 @@ import profileIMG from '../../assets/profileIMG.png';
 import UploadImage from '../UploadImage/UploadImage';
 import { DatePicker } from 'react-rainbow-components';
 import client from '../../utils/client';
+import { useState } from 'react';
 
 export default function EmployeeProfile({
 	currUser,
@@ -14,7 +15,6 @@ export default function EmployeeProfile({
 	setUploadProfileImage,
 	uploadProfileImage,
 }) {
-	const host = process.env.REACT_APP_IMG_URL;
 	const handleChange = async (e) => {
 		if (typeof e.getMonth === 'function') {
 			const value = e.toISOString();
@@ -167,18 +167,19 @@ export default function EmployeeProfile({
 				</div>
 				<div className='profile-controller'>
 					<span>Bio</span>
-					<div className='profile-controller--details'>
+					<div className='profile-controller--details bio'>
 						{!checkUser['bio'] ? (
 							user.employeeProfile.bio || (
 								<span id='profile-details-empty'>Please fill out</span>
 							)
 						) : (
-							<input
+							<textarea
 								value={user.employeeProfile.bio}
 								onChange={handleChange}
 								className='updateUser'
 								type='text'
 								name='bio'
+								id='bio-open'
 							/>
 						)}
 					</div>
