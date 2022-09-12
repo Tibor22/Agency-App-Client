@@ -60,6 +60,13 @@ export default function Dropdown({ query, name, setQuery, setPageNumber }) {
 			options={options}
 			style={styles}
 			formatGroupLabel={formatGroupLabel}
+			value={options.find((option) => {
+				if (name === 'lte') {
+					return option.value === query.lte;
+				} else if (name === 'gte') {
+					return option.value === query.gte;
+				}
+			})}
 		/>
 	);
 }

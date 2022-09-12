@@ -261,4 +261,8 @@
   color: red;
   cursor: pointer;
   font-weight: bolder;
+}
+
+.text-center {
+  text-align: center;
 }/*# sourceMappingURL=posts.css.map */

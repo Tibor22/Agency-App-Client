@@ -15,19 +15,49 @@ import JobPost from '../../pages/JobPost/JobPost';
 import JobPostCard from '../../components/JobPostCard';
 import client from '../../utils/client';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 export default function Posts() {
 	const [formData, setFormData] = useState('');
 	const location = <FontAwesomeIcon icon={faLocationDot} />;
 	const [postsQuery, setPostsQuery] = useContext(PostsContext);
 	const [state, dispatch] = useContext(UserContext);
-	const [query, setQuery] = useState(postsQuery);
+	const [query, setQuery] = useState({ ...postsQuery, reset: false });
 	const [pageNumber, setPageNumber] = useState(0);
+
 	const { posts, setPosts, hasMore, loading, error } = usePostsSearch(
 		query,
 		pageNumber
 	);
-	const host = process.env.REACT_APP_IMG_URL;
+
+	const resetSearch = async () => {
+		console.log('in');
+		setQuery({ gte: 'select', lte: 'select' });
+		setFormData('');
+		setPageNumber(0);
+		let cancel;
+		axios({
+			method: 'GET',
+			url: `${
+				process.env.REACT_APP_API_URL
+			}/posts?pageNumber=${pageNumber}&location=${query?.location || ''}&type=${
+				query?.type || ''
+			}&gte=${query?.gte || '1'}&lte=${
+				query?.lte || '30'
+			}&gteDate=${query?.jobStart?.toISOString()}`,
+
+			cancelToken: new axios.CancelToken((c) => (cancel = c)),
+		})
+			.then((res) => {
+				console.log(res);
+				setPosts((prevPosts) => {
+					return [...new Set([...prevPosts, ...res.data])];
+				});
+			})
+			.catch((e) => {
+				if (axios.isCancel(e)) return;
+			});
+		return () => cancel();
+	};
 
 	setPostsQuery(null);
 	const observer = useRef();
@@ -129,6 +159,9 @@ export default function Posts() {
 								setPageNumber={setPageNumber}
 								query={query}
 							/>
+							<div onClick={resetSearch} className='search-btn text-center'>
+								Reset Search
+							</div>
 						</form>
 					</div>
 					<div className='posts-container_posts'>
