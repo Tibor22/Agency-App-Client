@@ -235,18 +235,19 @@ export default function EmployerProfile({
 				</div>
 				<div className='profile-controller'>
 					<span>Bio</span>
-					<div className='profile-controller--details'>
+					<div className='profile-controller--details bio'>
 						{!checkUser['bio'] ? (
 							user.employerProfile.bio || (
 								<span id='profile-details-empty'>Please fill out</span>
 							)
 						) : (
-							<input
+							<textarea
 								value={user.employerProfile.bio}
 								onChange={handleChange}
 								className='updateUser'
 								type='text'
 								name='bio'
+								id='bio-open'
 							/>
 						)}
 					</div>
