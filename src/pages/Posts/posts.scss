@@ -109,13 +109,13 @@
 		}
 
 		& .company-logo {
-			width: 6rem;
-			height: 6rem;
+			max-width: 6rem;
+			max-height: 6rem;
 			align-self: center;
 
 			img {
 				width: 100%;
-				height: auto;
+				max-height: 100%;
 				object-fit: cover;
 				object-position: center;
 			}

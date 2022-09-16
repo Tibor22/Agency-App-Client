@@ -107,13 +107,13 @@
   justify-self: center;
 }
 .posts-container_posts--card .company-logo {
-  width: 6rem;
-  height: 6rem;
+  max-width: 6rem;
+  max-height: 6rem;
   align-self: center;
 }
 .posts-container_posts--card .company-logo img {
   width: 100%;
-  height: auto;
+  max-height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;

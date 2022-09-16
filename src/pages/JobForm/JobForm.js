@@ -8,6 +8,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import { useContext, useEffect } from 'react';
 import fetchProfile from '../../utils/fetchProfile';
+import SelectTime from '../../components/SelectTime.js';
 export default function JobForm() {
 	const location = useLocation();
 	const postToUpdate = location.state;
@@ -26,6 +27,10 @@ export default function JobForm() {
 	});
 	useEffect(() => {
 		if (postToUpdate?.isEditing) {
+			const frame = postToUpdate.timeFrame.split(' - ');
+			postToUpdate.from = frame[0];
+			postToUpdate.to = frame[1];
+
 			setFormData({ ...postToUpdate, file: '' });
 		}
 	}, []);
@@ -34,6 +39,7 @@ export default function JobForm() {
 	const [errorMsg, setErrorMsg] = useState(null);
 	const currUser = JSON.parse(localStorage.getItem('user'));
 	const [user, dispatch] = useContext(UserContext);
+	console.log(formData);
 	const styles = {
 		display: 'inline-block',
 		padding: '1rem',
@@ -53,6 +59,13 @@ export default function JobForm() {
 			setErrorMsg('Please Choose Start and End Date');
 			return;
 		}
+		if (formData.from === '' || formData.to === '') {
+			setErrorMsg('Please Choose Start and End Time');
+			return;
+		}
+		formData.timeFrame = `${formData.from} - ${formData.to}`;
+		delete formData.from;
+		delete formData.to;
 		setLoading(true);
 
 		let formData1 = new FormData();
@@ -176,17 +189,42 @@ export default function JobForm() {
 								setFormData={setFormData}
 							/>
 						</label>
-						<label className='jobForm-controller'>
-							<span>TimeFrame</span>
-							<input
+						<span className='time-frame'>TimeFrame</span>
+						<div className='jobForm-flex-container'>
+							<label className='jobForm-controller'>
+								<div className='time-from'>
+									<span>From:</span>
+									{
+										<SelectTime
+											setFormData={setFormData}
+											formData={formData}
+											name={'from'}
+										/>
+									}
+								</div>
+
+								{/* <input
 								onChange={handleChange}
 								type='text'
 								placeholder='e.g. 9:30AM - 17:30AM'
 								value={formData.timeFrame}
 								name='timeFrame'
 								required
-							/>
-						</label>
+							/> */}
+							</label>
+							<label className='jobForm-controller'>
+								<div className='time-to'>
+									<span>To:</span>
+									{
+										<SelectTime
+											setFormData={setFormData}
+											formData={formData}
+											name={'to'}
+										/>
+									}
+								</div>
+							</label>
+						</div>
 						<div className='jobForm-flex-container'>
 							<label className='jobForm-controller sm'>
 								<span>Salary per hour</span>

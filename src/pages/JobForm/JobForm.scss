@@ -70,6 +70,7 @@
 
 .jobForm {
 	// background-color: var(--color-btn-primary-light);
+
 	padding: 1.5rem;
 	@media screen and (max-width: 330px) {
 		padding: 0rem;
@@ -151,6 +152,17 @@
 		background-color: var(--color-btn-primary-hover);
 		cursor: pointer;
 	}
+}
+.time-from,
+.time-to {
+	color: black;
+
+	& span {
+		color: white;
+	}
+}
+.time-frame {
+	font-size: 1.3rem;
 }
 
 .loader-container-form {

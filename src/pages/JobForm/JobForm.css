@@ -144,6 +144,19 @@
   cursor: pointer;
 }
 
+.time-from,
+.time-to {
+  color: black;
+}
+.time-from span,
+.time-to span {
+  color: white;
+}
+
+.time-frame {
+  font-size: 1.3rem;
+}
+
 .loader-container-form {
   z-index: 1;
   position: absolute;
