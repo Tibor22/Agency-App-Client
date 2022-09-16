@@ -34,7 +34,12 @@ export default function Dropdown({ setFormData, formData, name }) {
 	};
 
 	const options = [
-		{ value: 'select', label: 'Please select you desired time' },
+		{
+			value: 'select',
+			label: `Please select you desired ${
+				name === 'from' ? 'starting' : 'finishing'
+			} time`,
+		},
 		{ value: '12 AM', label: '12 AM' },
 		{ value: '1 AM', label: '1 AM' },
 		{ value: '2 AM', label: '2 AM' },

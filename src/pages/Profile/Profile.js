@@ -15,26 +15,19 @@ export default function Profile() {
 		firstName: false,
 		lastName: false,
 	});
-	const host = process.env.REACT_APP_IMG_URL;
+	const [employerJobs, setEmployerJobs] = useState();
+
 	useEffect(() => {
 		const getUser = async () => {
 			const res = await fetchProfile(currUser);
 			setUser(res.data);
+			if (res.data?.employerProfile) {
+				setEmployerJobs(res.data.employerProfile.jobPost);
+			}
 			setIsLoading(false);
 		};
 		getUser();
 	}, []);
-	console.log(user);
-	async function handleDelete(e, post) {
-		console.log(post, 'CLICKed');
-		setIsLoading(true);
-		await client.delete(
-			`/posts/${post.id}?profileId=${post.employerProfileId}`
-		);
-		const res = await fetchProfile(currUser);
-		setUser(res.data);
-		setIsLoading(false);
-	}
 
 	const uploadImage = async () => {
 		setIsLoading(true);
@@ -94,10 +87,10 @@ export default function Profile() {
 					</div>
 					{currUser?.type === 'employer' &&
 						user &&
-						user.employerProfile?.jobPost.map((post, i) => {
+						employerJobs.map((post, i) => {
 							return (
 								<JobPostCard
-									handleDelete={handleDelete}
+									setEmployerJobs={setEmployerJobs}
 									key={post.id}
 									post={post}
 								/>

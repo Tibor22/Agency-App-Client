@@ -15,6 +15,7 @@ import JobPost from '../../pages/JobPost/JobPost';
 import JobPostCard from '../../components/JobPostCard';
 import client from '../../utils/client';
 import { Link } from 'react-router-dom';
+import DeleteModal from '../../components/DeleteModal.js';
 import axios from 'axios';
 export default function Posts() {
 	const [formData, setFormData] = useState('');
@@ -74,21 +75,6 @@ export default function Posts() {
 		},
 		[loading, hasMore]
 	);
-
-	console.log(posts);
-
-	async function handleDelete(e, post) {
-		console.log(post, 'CLICKed');
-		await client.delete(
-			`/posts/${post.id}?profileId=${post.employerProfileId}`
-		);
-
-		setPosts((prevPosts) => {
-			return (prevPosts = prevPosts.filter((post1) => {
-				if (post1.id !== post.id) return true;
-			}));
-		});
-	}
 
 	function handleSearch(e) {
 		const { value, name } = e.target;
@@ -195,11 +181,8 @@ export default function Posts() {
 																Edit
 															</Link>
 														</div>
-														<div
-															onClick={(e) => handleDelete(e, post)}
-															className='post-delete'
-														>
-															x
+														<div className='post-delete'>
+															<DeleteModal setPosts={setPosts} post={post} />
 														</div>
 													</>
 												)}
@@ -237,11 +220,7 @@ export default function Posts() {
 									);
 								} else {
 									return (
-										<JobPostCard
-											handleDelete={handleDelete}
-											key={i}
-											post={post}
-										/>
+										<JobPostCard setPosts={setPosts} key={i} post={post} />
 									);
 								}
 							})}

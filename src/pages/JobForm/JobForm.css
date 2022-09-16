@@ -147,6 +147,7 @@
 .time-from,
 .time-to {
   color: black;
+  margin-bottom: 1rem;
 }
 .time-from span,
 .time-to span {
