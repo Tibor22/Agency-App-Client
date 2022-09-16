@@ -20,7 +20,6 @@ import UnderDevelopment from './pages/UnderDevelopment/UnderDevelopment';
 function App() {
 	const [user, dispatch] = useContext(UserContext);
 	const [loading, setLoading] = useState(true);
-	console.log(user);
 	const loader = document.querySelector('.loader-container-main');
 
 	if (loader) {
@@ -29,6 +28,10 @@ function App() {
 			setLoading(false);
 		}, 2000);
 	}
+	window.onbeforeunload = () => {
+		localStorage.removeItem('user');
+	};
+
 	return (
 		!loading && (
 			<BrowserRouter>
