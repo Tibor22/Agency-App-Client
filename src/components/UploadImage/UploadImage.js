@@ -1,3 +1,5 @@
+import './UploadImage.css';
+
 export default function UploadImage({ setFormData, formData, styles, title }) {
 	const handleFileChange = (e) => {
 		const file = e.target.files[0];
@@ -14,6 +16,7 @@ export default function UploadImage({ setFormData, formData, styles, title }) {
 				type='file'
 				id='image'
 				name='image'
+				class='custom-file-input'
 			></input>
 		</>
 	);

@@ -231,6 +231,10 @@
   border: 5px solid rgb(65, 227, 65);
 }
 
+.posts-header {
+  padding: 0.4rem;
+}
+
 .post-edit {
   position: absolute;
   top: 0.4rem;

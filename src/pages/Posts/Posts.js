@@ -153,6 +153,7 @@ export default function Posts() {
 					<div className='posts-container_posts'>
 						{posts &&
 							posts.map((post, i) => {
+								if (post.numberOfApplicants === 0) return;
 								if (posts.length === i + 1) {
 									const answer = state?.user?.jobPosts
 										? state.user.jobPosts.some(
@@ -172,7 +173,7 @@ export default function Posts() {
 											{!post.anyoneApplied &&
 												state.user?.profileId === post?.employerProfileId &&
 												state?.user.type === 'employer' && (
-													<>
+													<div className={`${answer ? 'posts-header' : ''}`}>
 														<div className='post-edit'>
 															<Link
 																to={`/jobPost`}
@@ -184,7 +185,7 @@ export default function Posts() {
 														<div className='post-delete'>
 															<DeleteModal setPosts={setPosts} post={post} />
 														</div>
-													</>
+													</div>
 												)}
 											<div className='company-main'>
 												<div className='company-logo'>
