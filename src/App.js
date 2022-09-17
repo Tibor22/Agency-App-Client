@@ -28,9 +28,6 @@ function App() {
 			setLoading(false);
 		}, 2000);
 	}
-	window.onbeforeunload = () => {
-		localStorage.removeItem('user');
-	};
 
 	return (
 		!loading && (
