@@ -67,7 +67,7 @@
 }
 @media screen and (max-width: 600px) {
   .sign-form input {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
   }
 }
 
@@ -95,13 +95,18 @@
   margin-bottom: 2rem;
   width: 80%;
 }
+@media screen and (max-width: 600px) {
+  .form-controller {
+    width: 90%;
+  }
+}
 
 .form-controller span {
   font-size: 1.3rem;
 }
 @media screen and (max-width: 600px) {
   .form-controller span {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
 }
 
